@@ -1,0 +1,279 @@
+/* Work Grid Container (Base) */
+.work-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 30px;
+    width: 100%;
+    margin-top: 40px;
+}
+
+/* --- Task 1: Category Grid (2 columns) --- */
+.category-grid {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+@media (max-width: 768px) {
+    .category-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Card Base (Categories) */
+.work-card {
+    position: relative;
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    /* Vertical portrait style for categories */
+    border-radius: 20px;
+    overflow: hidden;
+    text-decoration: none;
+    background-color: #1a1a1a;
+    transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+    transform-style: preserve-3d;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+/* Hover: Glass Float Reveal Animation */
+.work-card:hover {
+    transform: translateY(-12px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    z-index: 2;
+}
+
+/* Background Image */
+.work-card-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s ease-out;
+}
+
+.work-card:hover .work-card-bg {
+    transform: scale(1.1);
+}
+
+/* Overlay - Subtle darken for text readability */
+.work-card-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 50%);
+    opacity: 0.6;
+    transition: opacity 0.4s ease;
+}
+
+.work-card:hover .work-card-overlay {
+    opacity: 0.8;
+}
+
+/* Glass Content Box (Categories) */
+.work-card-content {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    padding: 20px 24px;
+
+    /* Glassmorphism */
+    background: rgba(255, 255, 255, 0.08);
+    /* Extremely subtle white */
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+
+    border-radius: 12px;
+
+    /* Reveal Animation State */
+    transform: translateY(20px);
+    opacity: 0;
+    transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+/* Show content on hover */
+.work-card:hover .work-card-content {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+/* Typography (Categories) */
+.work-card-title {
+    margin: 0;
+    color: #ffffff;
+    font-family: 'Helvetica', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+}
+
+.work-card-category {
+    color: rgba(255, 255, 255, 0.7);
+    font-family: 'Helvetica', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+
+/* --- Task 2: Work Section (Projects List - Full Width) --- */
+
+.project-list-container {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+    padding-top: 40px;
+    padding-bottom: 80px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.project-full-card {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 70vh;
+    /* Large, cinematic height */
+    min-height: 500px;
+    border-radius: 24px;
+    overflow: hidden;
+    text-decoration: none;
+    background-color: #111;
+    transform-style: preserve-3d;
+    transition: box-shadow 0.4s ease;
+    cursor: pointer;
+}
+
+/* Background Image */
+.project-full-bg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+/* On hover (handled by JS for 3D, but image scale here) */
+.project-full-card:hover .project-full-bg {
+    transform: scale(1.05);
+}
+
+/* Gradient Overlay */
+.project-full-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.2) 50%, rgba(0, 0, 0, 0.1) 100%);
+    z-index: 2;
+    opacity: 0.8;
+    transition: opacity 0.4s ease;
+}
+
+.project-full-card:hover .project-full-overlay {
+    opacity: 0.6;
+    /* Lighten up to show image more */
+}
+
+/* Content Layout */
+.project-full-content {
+    position: absolute;
+    bottom: 40px;
+    left: 40px;
+    z-index: 3;
+    pointer-events: none;
+    /* Let clicks pass through */
+    transform: translateZ(30px);
+    /* 3D pop effect */
+}
+
+.project-full-meta {
+    font-family: 'Helvetica', sans-serif !important;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    transform: translateY(20px);
+    opacity: 0;
+    transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.project-full-title {
+    font-family: 'Helvetica', sans-serif !important;
+
+    color: #fff;
+    font-size: 3rem;
+    font-weight: 500;
+    margin: 0;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    transform: translateY(20px);
+    opacity: 0;
+    transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.1s;
+}
+
+.project-full-btn {
+    display: inline-block;
+    margin-top: 24px;
+    padding: 12px 28px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 30px;
+    color: #fff;
+    font-family: 'Helvetica', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transform: translateY(20px);
+    opacity: 0;
+    transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.2s;
+}
+
+/* Reveal elements on load or hover logic? 
+   Let's make them visible by default or animate in. 
+   Actually, for "Work Section" listing, displaying them immediately is better UX.
+*/
+
+.project-full-meta,
+.project-full-title,
+.project-full-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Hover Effect for Button */
+.project-full-card:hover .project-full-btn {
+    background: #fff;
+    color: #000;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .work-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 20px;
+    }
+
+    .project-full-card {
+        height: 50vh;
+    }
+
+    .project-full-title {
+        font-size: 2rem;
+    }
+
+    .project-full-content {
+        left: 20px;
+        bottom: 30px;
+    }
+}
