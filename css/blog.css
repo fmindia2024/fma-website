@@ -227,3 +227,22 @@
         filter: none;
     }
 }
+/* MOBILE FIXES */
+@media screen and (max-width: 479px) {
+    .blog-title {
+        font-size: 2.2rem;
+    }
+    
+    .blog-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    
+    .blog-container {
+        padding: 0 15px;
+    }
+    
+    .blog-card-title {
+        font-size: 1.5rem;
+    }
+}

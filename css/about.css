@@ -1,0 +1,229 @@
+:root {
+    --about-bg: #0b0d12;
+    --about-text-primary: #ffffff;
+    --about-text-secondary: #a4b1cd;
+    --about-accent: #ffffff;
+}
+
+/* Base Styles */
+body {
+    background-color: var(--about-bg);
+    color: var(--about-text-primary);
+}
+
+.about-section {
+    position: relative;
+    padding: 180px 0 100px;
+    background-color: var(--about-bg);
+    overflow: hidden;
+}
+
+/* Typography */
+.about-title-large {
+    font-family: 'Helvetica', sans-serif !important;
+    font-size: 5rem;
+    font-weight: 300;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 40px;
+    color: var(--about-text-primary);
+}
+
+.about-subtitle {
+    font-family: 'Helvetica', sans-serif;
+    font-size: 1.5rem;
+    color: var(--about-text-secondary);
+    line-height: 1.5;
+    max-width: 800px;
+    font-weight: 300;
+    margin-bottom: 80px;
+}
+
+/* Logo Section */
+.logo-story-section {
+    padding: 120px 0;
+    background-color: #0f1116;
+    position: relative;
+}
+
+.logo-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+}
+
+.logo-description h3 {
+    font-family: 'Helvetica', sans-serif;
+    font-size: 2.5rem;
+    margin-bottom: 24px;
+    font-weight: 400;
+}
+
+.logo-description p {
+    font-family: 'Helvetica', sans-serif;
+    font-size: 1.125rem;
+    color: var(--about-text-secondary);
+    line-height: 1.7;
+    margin-bottom: 24px;
+}
+
+.logo-visual {
+    background: #ffffff;
+    padding: 60px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.logo-visual img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Team Section */
+.team-section {
+    padding: 140px 0;
+    background-color: var(--about-bg);
+}
+
+.team-header {
+    margin-bottom: 80px;
+    text-align: center;
+}
+
+.team-header h2 {
+    font-family: 'Helvetica', sans-serif;
+    font-size: 3.5rem;
+    font-weight: 300;
+    margin-bottom: 16px;
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+}
+
+.team-card {
+    position: relative;
+
+}
+
+.team-image-wrapper {
+    width: 100%;
+    aspect-ratio: 3/4;
+    overflow: hidden;
+    margin-bottom: 24px;
+    border-radius: 2px;
+    filter: grayscale(100%);
+    transition: filter 0.5s ease;
+}
+
+.team-card:hover .team-image-wrapper {
+    filter: grayscale(0%);
+}
+
+.team-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s ease;
+}
+
+.team-card:hover .team-image {
+    transform: scale(1.05);
+}
+
+.team-info {
+    text-align: left;
+}
+
+.team-name {
+    font-family: 'Helvetica', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin-bottom: 4px;
+    color: #fff;
+}
+
+.team-role {
+    font-family: 'Helvetica', sans-serif;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--about-text-secondary);
+    margin-bottom: 12px;
+}
+
+.linkedin-link {
+    display: inline-block;
+    padding: 8px 0;
+    color: #fff;
+    font-size: 0.9rem;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    transition: all 0.3s ease;
+}
+
+.linkedin-link:hover {
+    border-bottom-color: #fff;
+    opacity: 0.8;
+}
+
+/* Responsive */
+@media screen and (max-width: 991px) {
+    .about-title-large {
+        font-size: 3.5rem;
+    }
+
+    .logo-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .team-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .team-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .about-subtitle {
+        font-size: 1.25rem;
+    }
+}
+/* MOBILE FIXES */
+@media screen and (max-width: 479px) {
+    .about-title-large {
+        font-size: 3rem; /* Smaller title */
+        margin-bottom: 30px;
+    }
+    
+    .about-subtitle {
+        font-size: 1.1rem;
+        line-height: 1.4;
+    }
+    
+    .team-grid {
+        grid-template-columns: 1fr; /* Stack team */
+        gap: 30px;
+    }
+    
+    .logo-visual {
+        padding: 20px;
+    }
+    
+    .logo-description h3 {
+        font-size: 1.8rem;
+    }
+    
+    .team-header h2 {
+        font-size: 2.5rem;
+    }
+}

@@ -277,3 +277,33 @@
         bottom: 30px;
     }
 }
+/* MOBILE FIXES */
+@media screen and (max-width: 479px) {
+    .work-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .project-full-card {
+        height: 60vh; /* Taller for mobile impact */
+        margin-bottom: 20px;
+    }
+    
+    .project-full-title {
+        font-size: 1.8rem;
+    }
+    
+    .project-full-content {
+        left: 20px;
+        bottom: 25px;
+        right: 20px;
+    }
+    
+    .project-list-container {
+        padding-top: 20px;
+        padding-bottom: 40px;
+        padding-left: 20px;
+        padding-right: 20px;
+        gap: 30px;
+    }
+}
