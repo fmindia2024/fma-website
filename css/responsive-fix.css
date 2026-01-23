@@ -1,0 +1,166 @@
+/* 
+   FMA Website - Responsive Fixes
+   This file contains mobile-specific overrides and improvements for a premium feel.
+*/
+
+/* --- 1. Global Padding & Containers --- */
+@media screen and (max-width: 991px) {
+
+    .container,
+    .blog-container,
+    .container-nav {
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+    }
+
+    .margin-100 {
+        margin-top: 60px !important;
+    }
+
+    .margin-80 {
+        margin-top: 50px !important;
+    }
+
+    .margin-60 {
+        margin-top: 40px !important;
+    }
+}
+
+/* --- 2. Typography Adjustments --- */
+@media screen and (max-width: 479px) {
+    .display-1.second._5rem {
+        font-size: 2.8rem !important;
+        line-height: 1.1 !important;
+    }
+
+    .display-1.second._1-7-rem {
+        font-size: 1.4rem !important;
+    }
+
+    h1.logo-svg {
+        font-size: 2.5rem !important;
+    }
+}
+
+/* --- 3. Index: About the Logo Section Mobile Optimization --- */
+@media screen and (max-width: 991px) {
+    .about-premium {
+        padding: 6rem 0 !important;
+        min-height: auto !important;
+    }
+
+    .about-premium .container>div {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 4rem !important;
+        text-align: center !important;
+    }
+
+    .about-premium h2.display-1,
+    .about-premium p,
+    .about-premium .magnetic-btn {
+        margin-left: auto !important;
+        margin-right: auto !important;
+        text-align: center !important;
+    }
+
+    .about-premium h2.display-1 {
+        font-size: 2.8rem !important;
+        line-height: 1.1 !important;
+        margin-bottom: 1.5rem !important;
+    }
+
+    .about-img-wrapper.primary {
+        margin: 0 auto !important;
+        width: 100% !important;
+        max-width: 400px !important;
+        height: auto !important;
+        padding: 1.5rem !important;
+    }
+
+    /* Long scrolling fix: ensure content is tight */
+    [data-w-id="about-text-col"],
+    [data-w-id="about-image-col"] {
+        transform: none !important;
+        opacity: 1 !important;
+    }
+}
+
+/* --- 4. Our Practice Section (Accordions) --- */
+@media screen and (max-width: 991px) {
+    .grid-2-column.reverse.add-gap {
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+    #practice-text {
+        margin-bottom: 40px !important;
+        text-align: left;
+    }
+
+    .service-item {
+        padding: 20px 0 !important;
+    }
+
+    .service-title {
+        font-size: 1.2rem !important;
+    }
+}
+
+/* --- 5. Footer Optimization --- */
+@media screen and (max-width: 767px) {
+    .footer {
+        padding: 60px 0 40px !important;
+    }
+
+    .footer .grid-2-column {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 40px !important;
+        text-align: left;
+    }
+
+    .footer h2.display-1 {
+        font-size: 2.2rem !important;
+        line-height: 1.2 !important;
+    }
+
+    .navigation-grid {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 20px !important;
+    }
+
+    .navigation-grid._1-column {
+        grid-template-columns: 1fr !important;
+    }
+
+    .social-content.left {
+        justify-content: flex-start !important;
+        margin-top: 20px;
+    }
+
+    .social-wrapper {
+        margin-right: 20px;
+        margin-left: 0 !important;
+    }
+}
+
+/* --- 6. Hero Interaction (Animation Wrapper) --- */
+@media screen and (max-width: 991px) {
+    .animation-wrapper {
+        display: none !important;
+        /* This complex desktop animation usually breaks mobile flow */
+    }
+}
+
+/* --- 7. Project & Blog Cards (Already handled but fine-tuning) --- */
+@media screen and (max-width: 479px) {
+    .blog-card-title {
+        font-size: 1.5rem !important;
+    }
+
+    .blog-header {
+        margin-bottom: 40px !important;
+    }
+}
