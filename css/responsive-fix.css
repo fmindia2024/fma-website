@@ -4,7 +4,25 @@
 */
 
 /* =========================================
-   1. Header / Navigation Fixes
+   1. Header / Navigation Fixes (Desktop & Global)
+   ========================================= */
+
+@media screen and (min-width: 992px) {
+
+    /* DESKTOP HEADER OVERLAP - Place strictly on top of blue animation */
+    .navigation-wrapper-main {
+        position: absolute !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        background-color: transparent !important;
+        z-index: 1000 !important;
+        mix-blend-mode: normal !important;
+    }
+}
+
+/* =========================================
+   2. Mobile & Tablet Fixes (Max 991px)
    ========================================= */
 
 @media screen and (max-width: 991px) {
@@ -25,6 +43,35 @@
         border-bottom: none !important;
         display: flex !important;
         align-items: center !important;
+    }
+
+    /* Fix Menu Button Visibility with CSS SVG fallback if image fails */
+    .menu-button {
+        padding: 8px !important;
+        margin-right: -8px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 40px !important;
+        height: 40px !important;
+        background: transparent !important;
+    }
+
+    /* Force visibility of the menu icon image */
+    .menu-button img {
+        width: 24px !important;
+        height: auto !important;
+        display: block !important;
+        filter: invert(1) brightness(2);
+        /* Ensure white */
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+
+    /* Force Menu Icon Visibility even if image fails (Backup) */
+    .menu-button .w-icon-nav-menu {
+        font-size: 30px;
+        color: #fff !important;
     }
 
     /* Force flex layout instead of grid to prevent column wrapping/breakage */
@@ -50,16 +97,17 @@
         margin: 0 !important;
     }
 
-    /* Force Lite Blue on Logo even if it has .w--current or other Webflow classes */
+    /* Force Lite Blue on Logo always on mobile for visibility */
     .navigation-link.for-logo,
     .navigation-link.for-logo .nav-text,
     .navigation-link.for-logo .nav-text.first,
     .navigation-link.for-logo .nav-text.second,
     .navigation-link.for-logo.w--current .nav-text {
         color: #00E5FF !important;
-        /* Extremely bright Lite Blue for maximum visibility */
+        /* Extremely bright Lite Blue */
         visibility: visible !important;
         opacity: 1 !important;
+        font-size: 1.3rem !important;
     }
 
     /* Navbar / Hamburger Container */
@@ -81,21 +129,6 @@
         justify-content: flex-end !important;
     }
 
-    /* Webflow default elements padding/margin cleanup */
-    .menu-button {
-        padding: 8px !important;
-        margin-right: -8px !important;
-        /* Offset padding */
-        display: flex !important;
-        align-items: center !important;
-    }
-
-    .menu-button img {
-        width: 24px !important;
-        filter: invert(1);
-        /* Ensure hamburger is white */
-    }
-
     /* Disable Webflow's default nav-menu display logic */
     .w-nav-menu {
         display: none !important;
@@ -104,18 +137,10 @@
     .w-nav-overlay {
         display: none !important;
     }
-}
-
-/* =========================================
-   2. Section & Content Fixes
-   ========================================= */
-
-@media screen and (max-width: 991px) {
 
     /* About Premium Section (Logo Story) */
     .about-premium {
         padding: 6rem 0 !important;
-        /* Reduce from 12rem */
         min-height: auto !important;
     }
 
@@ -131,22 +156,48 @@
         padding: 1.5rem !important;
     }
 
-    /* General Containers - 16px padding on mobile */
+    /* General Containers - Strict 16px padding on mobile */
     .container,
     .blog-container,
     .navigation-content,
     .footer .container,
-    section .container {
+    section .container,
+    .w-container {
         padding-left: 16px !important;
         padding-right: 16px !important;
         width: 100% !important;
         max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Remove double padding from nested grid containers */
+    .work-grid-container {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        width: 100% !important;
+    }
+
+    /* Specific fix for Work Grid / Hero Images to remove unwanted extra padding */
+    .hero-images,
+    .wrok-card-wrapper,
+    .card-row,
+    .project-list-container {
+        width: 100% !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+
+    /* Ensure the images themselves stretch */
+    .main-image,
+    .work-wrapper {
+        width: 100% !important;
     }
 
     /* Hero Section Spacing (Adjusted for absolute header) */
     .top-hero.main {
         padding-top: 40px !important;
-        /* Reset to match absolute positioning layout */
     }
 }
 
