@@ -211,18 +211,19 @@
         overflow: visible !important;
     }
 
-    /* Force the menu button to be visible but respect Flexbox layout */
+    /* Force the menu button to be visible */
     .menu-button,
     .w-nav-button {
         display: block !important;
         visibility: visible !important;
         opacity: 1 !important;
 
-        /* Positioning - Reset absolute to allow Flexbox alignment */
-        position: static !important;
-        /* top/right not needed with static */
+        /* Positioning */
+        position: absolute !important;
+        top: 24px !important;
+        right: 20px !important;
 
-        /* Reset Webflow defaults */
+        /* Reset Webflow defaults that might hide it */
         background-color: transparent !important;
         background-image: none !important;
         border: none !important;
@@ -230,18 +231,18 @@
 
         /* Touch target size */
         padding: 10px !important;
+        width: auto !important;
+        height: auto !important;
         min-width: 44px;
         min-height: 44px;
 
         z-index: 99999 !important;
         cursor: pointer;
 
+        /* Flex center to align icon */
         display: flex !important;
         justify-content: center;
         align-items: center;
-
-        /* Margin adjustment if needed */
-        margin: 0 !important;
     }
 
     /* Icon Styling */
