@@ -560,12 +560,9 @@ blockquote {
 }
 
 .part-2 {
-  grid-column-gap: 20%;
-  grid-row-gap: 20%;
-  justify-content: flex-start;
-  align-items: flex-start;
-  width: 100%;
+  width: auto;
   display: flex;
+  align-items: center;
 }
 
 .navlinks {
@@ -592,41 +589,39 @@ blockquote {
 }
 
 .navigation-wrapper-main {
-  z-index: 1100;
-  filter: invert();
-  mix-blend-mode: difference;
+  z-index: 1000;
   width: 100%;
-  height: 72px;
-  margin-left: auto;
-  margin-right: auto;
-  position: sticky;
-  inset: 0% 0% auto;
+  height: auto;
+  margin: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 24px 0;
+  background: transparent;
+  pointer-events: none;
+  /* Let clicks pass through, but re-enable on children */
 }
 
 .navigation-content {
-  z-index: 9999;
-  width: var(--page-container--width);
-  max-width: var(--page-container--container);
-  grid-column-gap: 16px;
-  grid-row-gap: 16px;
-  grid-template-rows: auto;
-  grid-template-columns: 1fr 1fr;
-  grid-auto-columns: 1fr;
-  justify-content: center;
-  place-items: start stretch;
-  margin-left: auto;
-  margin-right: auto;
-  padding-top: 25px;
-  display: grid;
-  position: absolute;
-  inset: 0% 0% auto;
+  z-index: 2;
+  width: 100%;
+  max-width: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 24px;
+  margin: 0;
+  position: relative;
+  inset: auto;
+  pointer-events: auto;
+  /* Re-enable clicks */
 }
 
 .part-3 {
-  grid-column-gap: 0px;
-  justify-content: flex-start;
-  align-items: flex-start;
+  width: auto;
   display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
 
 .button-main {
@@ -656,9 +651,12 @@ blockquote {
   grid-column-gap: 0px;
   grid-row-gap: 0px;
   order: 1;
-  justify-content: space-between;
-  align-items: stretch;
+  justify-content: flex-end;
+  /* Ensure menu pushes right */
+  align-items: center;
+  /* Prevent stretching */
   display: flex;
+  width: 100%;
 }
 
 .nav-menu {
@@ -676,7 +674,8 @@ blockquote {
 }
 
 .navigation-link {
-  color: var(--colors--first-color);
+  color: #ffffff;
+  /* White text for nav links */
   font-size: var(--button--nav-text);
   line-height: var(--line-height--paragraph-line-height);
   font-weight: var(--font-weight--500);
@@ -690,15 +689,25 @@ blockquote {
 }
 
 .navigation-link:where(.w-variant-c88d97d7-2cae-93c7-4d4a-436a02b27614) {
-  color: var(--color--first-color);
+  color: #ffffff;
   font-size: var(--font--h4);
 }
 
 .navigation-link.for-button {
   opacity: 1;
-  color: var(--color--first-color);
+  color: #ffffff;
   letter-spacing: -.15px;
   font-size: 1rem;
+}
+
+.navigation-link.for-logo {
+  color: #FFD700;
+  /* Gold color for Logo */
+}
+
+/* Invert menu icon to make it white if it is black */
+.menu-button img {
+  filter: invert(1);
 }
 
 .navigation-link.for-footer {
@@ -1175,8 +1184,13 @@ blockquote {
 
 .top-logo {
   height: 20vh;
-  position: sticky;
-  top: auto;
+  position: relative;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+  left: 0;
+  top: 0;
+  overflow: hidden;
 }
 
 .bg-video {
@@ -3007,52 +3021,72 @@ a:hover {
   background-color: var(--brand-color) !important;
   color: #fff !important;
 }
+
 /* AUTOMATED MOBILE FIXES ADDED */
 @media screen and (max-width: 479px) {
+
   /* Navigation Fixes */
   .navigation-wrapper-main {
-     mix-blend-mode: normal;
-     background-color: #fff; /* Ensure visibility */
+    mix-blend-mode: normal;
+    background-color: #fff;
+    /* Ensure visibility */
   }
+
   .navlinks {
-    font-size: 14vw; /* Scale logo text */
+    font-size: 14vw;
+    /* Scale logo text */
   }
+
   .menu-button {
     padding: 15px;
   }
-  
+
   /* Typography Scaling */
-  h1 { font-size: 2.5rem; }
-  h2 { font-size: 1.8rem; }
-  .display-1 { font-size: 2.5rem; }
-  .display-1.second._7rem { font-size: 3rem; }
-  
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  h2 {
+    font-size: 1.8rem;
+  }
+
+  .display-1 {
+    font-size: 2.5rem;
+  }
+
+  .display-1.second._7rem {
+    font-size: 3rem;
+  }
+
   /* Layout Fixes */
   .container {
     width: 90%;
     margin-left: auto;
     margin-right: auto;
   }
+
   .section {
     padding-top: 60px;
     padding-bottom: 60px;
   }
-  
+
   /* Hero Adjustments */
   .hero-content {
     padding-top: 120px;
     padding-bottom: 60px;
   }
-  
+
   /* Project Grid / Work Wrapper */
-  .work-wrapper, .work-wrapper-first {
+  .work-wrapper,
+  .work-wrapper-first {
     margin-bottom: 40px;
   }
-  
+
   /* Footer Fixes */
   .footer {
     padding-bottom: 40px;
   }
+
   .navigation-grid._1-column {
     align-items: center;
     text-align: center;

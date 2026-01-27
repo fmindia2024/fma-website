@@ -199,47 +199,49 @@
    ========================================= */
 
 @media screen and (max-width: 991px) {
+
     /* Ensure the wrapper allows the button to be seen */
     .navigation-wrapper-main {
         overflow: visible !important;
         z-index: 1100 !important;
     }
 
-    .container-nav, .navigation-content {
+    .container-nav,
+    .navigation-content {
         overflow: visible !important;
     }
 
-    /* Force the menu button to be visible */
-    .menu-button, .w-nav-button {
+    /* Force the menu button to be visible but respect Flexbox layout */
+    .menu-button,
+    .w-nav-button {
         display: block !important;
         visibility: visible !important;
         opacity: 1 !important;
-        
-        /* Positioning */
-        position: absolute !important;
-        top: 24px !important;
-        right: 20px !important;
-        
-        /* Reset Webflow defaults that might hide it */
+
+        /* Positioning - Reset absolute to allow Flexbox alignment */
+        position: static !important;
+        /* top/right not needed with static */
+
+        /* Reset Webflow defaults */
         background-color: transparent !important;
         background-image: none !important;
         border: none !important;
         box-shadow: none !important;
-        
+
         /* Touch target size */
         padding: 10px !important;
-        width: auto !important;
-        height: auto !important;
         min-width: 44px;
         min-height: 44px;
-        
+
         z-index: 99999 !important;
         cursor: pointer;
-        
-        /* Flex center to align icon */
+
         display: flex !important;
         justify-content: center;
         align-items: center;
+
+        /* Margin adjustment if needed */
+        margin: 0 !important;
     }
 
     /* Icon Styling */
@@ -249,7 +251,7 @@
         height: auto !important;
         max-width: none !important;
     }
-    
+
     /* Ensure nav links are hidden on mobile to show only hamburger */
     .nav-menu.w-nav-menu {
         display: none !important;
@@ -257,9 +259,5 @@
 }
 
 @media screen and (max-width: 767px) {
-     /* Refinements specifically for mobile phones */
-    .menu-button, .w-nav-button {
-        top: 20px !important;
-        right: 20px !important;
-    }
+    /* Padding is handled by the main navigation container now */
 }
