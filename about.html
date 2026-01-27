@@ -166,23 +166,20 @@
                         spirited mark of the human hand.
                     </p>
                 </div>
-                <div class="logo-visual"
-                    style="flex-direction: column; padding: 0; background: transparent; box-shadow: none;">
-                    <!-- Artist Portrait & Logo Composite -->
-                    <div style="display: flex; gap: 20px; width: 100%;">
-                        <div style="flex: 1; height: 400px; overflow: hidden; border-radius: 4px;">
-                            <img src="images/founder.png" alt="Juan Suárez Botas and Fernando Martin"
-                                style="width: 100%; height: 100%; object-fit: cover;">
-                        </div>
-                        <div
-                            style="flex: 1; background: #fff; padding: 40px; border-radius: 4px; display: flex; align-items: center; justify-content: center;">
-                            <img src="images/fma-logo-artwork.png" alt="FMA Logo Sketch"
-                                style="max-width: 100%; height: auto;">
-                        </div>
+                <div class="identity-visual-wrapper">
+                    <!-- Artist Portrait Card -->
+                    <div class="identity-card">
+                        <img src="images/founder.png" alt="Juan Suárez Botas and Fernando Martin">
                     </div>
-                    <div style="margin-top: 15px; width: 100%; text-align: right; color: #666; font-size: 0.8rem;">
-                        Juan Suárez Botas & Fernando Martin
+
+                    <!-- Logo Card -->
+                    <div class="identity-card logo-card">
+                        <img src="images/fma-logo-artwork.png" alt="FMA Logo Sketch">
                     </div>
+                </div>
+                <!-- Caption outside/below cards -->
+                <div style="margin-top: 15px; width: 100%; text-align: right; color: #666; font-size: 0.8rem;">
+                    Juan Suárez Botas & Fernando Martin
                 </div>
             </div>
         </div>
@@ -281,6 +278,54 @@
                     start: "top 80%"
                 }
             });
+
+            // Identity Section: Staggered Entrance
+            gsap.from(".identity-card", {
+                y: 50,
+                opacity: 0,
+                duration: 1,
+                stagger: 0.3,
+                ease: "power3.out",
+                scrollTrigger: {
+                    trigger: ".identity-visual-wrapper",
+                    start: "top 85%"
+                },
+                onComplete: function () {
+                    // Clear transform so CSS hover effects can take over cleanly
+                    gsap.set(".identity-card", { clearProps: "transform" });
+                }
+            });
+
+            // Identity Section: Image Parallax (Storytelling effect)
+            // We animate the images inside the cards moving in opposite directions
+            // to create a subtle, connected "breathing" feel on scroll.
+            gsap.fromTo(".identity-card:nth-child(1) img",
+                { yPercent: -10 },
+                {
+                    yPercent: 10,
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: ".identity-visual-wrapper",
+                        start: "top bottom",
+                        end: "bottom top",
+                        scrub: 1
+                    }
+                }
+            );
+
+            gsap.fromTo(".identity-card:nth-child(2) img",
+                { yPercent: 10 },
+                {
+                    yPercent: -10,
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: ".identity-visual-wrapper",
+                        start: "top bottom",
+                        end: "bottom top",
+                        scrub: 1
+                    }
+                }
+            );
         });
     </script>
 </body>

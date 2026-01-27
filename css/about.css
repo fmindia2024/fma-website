@@ -198,32 +198,153 @@ body {
         font-size: 1.25rem;
     }
 }
+
 /* MOBILE FIXES */
 @media screen and (max-width: 479px) {
     .about-title-large {
-        font-size: 3rem; /* Smaller title */
+        font-size: 3rem;
+        /* Smaller title */
         margin-bottom: 30px;
     }
-    
+
     .about-subtitle {
         font-size: 1.1rem;
         line-height: 1.4;
     }
-    
+
     .team-grid {
-        grid-template-columns: 1fr; /* Stack team */
+        grid-template-columns: 1fr;
+        /* Stack team */
         gap: 30px;
     }
-    
+
     .logo-visual {
         padding: 20px;
     }
-    
+
     .logo-description h3 {
         font-size: 1.8rem;
     }
-    
+
     .team-header h2 {
         font-size: 2.5rem;
+    }
+}
+
+/* Identity Section Floating Cards */
+.identity-visual-wrapper {
+    display: flex;
+    gap: 30px;
+    width: 100%;
+    margin-top: 40px;
+}
+
+.identity-card {
+    flex: 1;
+    height: 400px;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    /* animation: float-card 6s ease-in-out infinite; <- Removed for GSAP control on desktop */
+    background-color: #0b0d12;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.6s ease;
+}
+
+/* Connected Hover Effect */
+.identity-visual-wrapper:hover .identity-card {
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.identity-visual-wrapper:hover .identity-card:nth-child(1) {
+    transform: translateY(-10px) rotate(-1deg);
+}
+
+.identity-visual-wrapper:hover .identity-card:nth-child(2) {
+    transform: translateY(-10px) rotate(1deg);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+}
+
+/* Image transition handled by card hover now, keeping it subtle */
+.identity-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.8s ease;
+}
+
+.identity-visual-wrapper:hover .identity-card img {
+    transform: scale(1.03);
+}
+
+/* Specific styling for the logo card to keep it contained/centered */
+.identity-card.logo-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle at center, #1a1e26 0%, #0b0d12 100%);
+}
+
+.identity-card.logo-card img {
+    width: auto;
+    height: auto;
+    max-width: 70%;
+    max-height: 70%;
+    object-fit: contain;
+}
+
+@keyframes float-card {
+    0% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-15px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+@media screen and (max-width: 991px) {
+    .identity-visual-wrapper {
+        gap: 20px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .identity-visual-wrapper {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .identity-card {
+        width: 100%;
+        height: 350px;
+        margin-bottom: 20px;
+        /* Re-enable simple float for mobile if desired, or keep static for performance */
+        animation: float-card 5s ease-in-out infinite;
+    }
+
+    .identity-card:nth-child(2) {
+        animation-delay: 2.5s;
+    }
+
+    /* Reduce floating motion on mobile to avoid distractions while scrolling */
+    @keyframes float-card {
+        0% {
+            transform: translateY(0px);
+        }
+
+        50% {
+            transform: translateY(-5px);
+        }
+
+        100% {
+            transform: translateY(0px);
+        }
     }
 }
