@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                 "client": "IT Professional",
                 "service": "Architecture",
                 "description": "Navigating a tight urban plot, this residence in Bangalore maximize volume and vertical connectivity.",
-                "image_main": "images/Work/Interior/house in bangalore/1.png",
+                "image_main": "images/Work/Interior/house in bangalore/1.webp",
                 "image_bg": "images/Work/Interior/house in bangalore/2.png",
                 "color": "#C62828",
             },
@@ -155,7 +155,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         {
             id: 'interior',
             name: 'Interior',
-            image: 'images/Work/Interior/house in bangalore/1.png'
+            image: 'images/Work/Interior/house in bangalore/1.webp'
         },
         {
             id: 'residential',

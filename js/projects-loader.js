@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function () {
             "category": "Residential",
             "year": "2021",
             "description": "Navigating a tight urban plot, this residence in Bangalore maximize volume and vertical connectivity.",
-            "image_main": "images/Work/Interior/house in bangalore/1.png"
+            "image_main": "images/Work/Interior/house in bangalore/1.webp"
         },
         {
             "id": "ayurvedic-clinic",
