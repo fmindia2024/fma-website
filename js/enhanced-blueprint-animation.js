@@ -1,6 +1,14 @@
 /**
- * Mesh Network Animation
- * Shows connected nodes with smooth wave motion.
+ * Architectural Time-Based Header System
+ * 
+ * Logic:
+ * - Real-time clock determines Day (06:00-18:00) or Night (18:00-06:00).
+ * - Animation Loop lasts exactly 5 minutes (300 seconds).
+ * - Elements move with extreme slowness and precision.
+ * 
+ * Performance:
+ * - Mobile optimized (reduced particle count).
+ * - Canvas recycling.
  */
 
 (function () {
@@ -8,141 +16,275 @@
     if (!canvas) return;
 
     const ctx = canvas.getContext('2d');
+    let width, height;
+    let isMobile = false;
 
-    // Configuration
+    // --- Configuration ---
     const CONFIG = {
-        bgColor: '#2C2E81',
-        nodeColor: 'rgba(255, 255, 255, 0.6)',
-        lineBaseColor: '255, 255, 255', // used for template strings
-        gridX: 10, // Creates 11 column points
-        gridY: 5,  // Creates 6 row points
-        waveAmplitude: 15,
-        horizontalAmplitude: 7.5,
-        connectionDistance: 200,
-        nodeSize: 3
+        // Palette
+        colors: {
+            daySky: { top: '#4A6FA5', bottom: '#1A1B4B' }, // Warmer blue top, deep bottom
+            nightSky: { top: '#0B0C2A', bottom: '#050510' }, // Deep architectural night
+            sun: '#FFFBEB', // Architectural White-Gold
+            moon: '#F0F4F8', // Cool White
+            cloud: 'rgba(255, 255, 255, 0.12)', // Subtle
+            star: 'rgba(255, 255, 255, 0.7)'
+        },
+        // Timing
+        cycleDuration: 300000, // 5 minutes in ms
     };
 
-    let nodes = [];
-    let time = 0;
+    // --- State ---
+    let lastTime = 0;
+    let cycleProgress = 0; // 0 to 1 over 5 mins
+    let isDay = true;
+
+    // --- Elements ---
+    let clouds = [];
+    let birds = [];
+    let stars = [];
+    let comets = [];
 
     // --- Initialization ---
+    function init() {
+        resize();
+        window.addEventListener('resize', resize);
 
-    function resizeCanvas() {
+        // Initial check
+        checkTimeOfDay();
+        setInterval(checkTimeOfDay, 60000); // Check every minute
+
+        initParticles();
+        requestAnimationFrame(animate);
+    }
+
+    function checkTimeOfDay() {
+        const hour = new Date().getHours();
+        isDay = (hour >= 6 && hour < 18);
+    }
+
+    function resize() {
         const dpr = window.devicePixelRatio || 1;
-        // canvas.width/height should match display size * pixel ratio for crispness
-        // However, based on prompt "canvas.width = canvas.offsetWidth", we follow simple sizing 
-        // or standard DPI handling. Let's use standard DPI for quality.
         const rect = canvas.getBoundingClientRect();
+
+        isMobile = rect.width < 768;
 
         canvas.width = rect.width * dpr;
         canvas.height = rect.height * dpr;
-
-        // Scale context
         ctx.scale(dpr, dpr);
+        width = rect.width;
+        height = rect.height;
 
-        // Logical size for calculations
-        canvas.logicalWidth = rect.width;
-        canvas.logicalHeight = rect.height;
-
-        initNodes();
+        initParticles(); // Re-init on resize to distribute correctly
     }
 
-    function initNodes() {
-        nodes = [];
-        const width = canvas.logicalWidth;
-        const height = canvas.logicalHeight;
+    function initParticles() {
+        // CLOUDS (Day)
+        clouds = [];
+        const cloudCount = isMobile ? 3 : 6;
+        for (let i = 0; i < cloudCount; i++) {
+            clouds.push({
+                x: Math.random() * width,
+                y: Math.random() * height * 0.4,
+                speed: 0.05 + Math.random() * 0.05, // Very slow
+                size: 0.5 + Math.random() * 0.8,
+                shape: Math.floor(Math.random() * 3) // 0:Cumulus, 1:Stratus, 2:Cirrus
+            });
+        }
 
-        // Distribute nodes evenly
-        // i goes from 0 to gridX (inclusive), j from 0 to gridY (inclusive)
-        const stepX = width / CONFIG.gridX;
-        const stepY = height / CONFIG.gridY;
-
-        for (let i = 0; i <= CONFIG.gridX; i++) {
-            for (let j = 0; j <= CONFIG.gridY; j++) {
-                const x = i * stepX;
-                const y = j * stepY;
-
-                nodes.push({
-                    x: x,
-                    y: y,
-                    baseX: x,
-                    baseY: y,
-                    // Random phases for organic movement
-                    phase: Math.random() * Math.PI * 2,
-                    phaseX: Math.random() * Math.PI * 2
-                });
+        // BIRDS (Day)
+        birds = [];
+        if (isMobile) {
+            // Mobile: 1 Soaring bird
+            birds.push({ type: 'soar', x: -50, y: height * 0.4, speed: 0.4, glide: 0 });
+        } else {
+            // Desktop: Full set
+            // 1. Soaring (Single)
+            birds.push({ type: 'soar', x: -50, y: height * 0.3, speed: 0.4, glide: 0 });
+            // 2. Directional (Pair)
+            birds.push({ type: 'direct', x: width + 50, y: height * 0.5, speed: -0.6, wing: 0 });
+            birds.push({ type: 'direct', x: width + 80, y: height * 0.55, speed: -0.6, wing: 0.5 });
+            // 3. Distant Flock
+            for (let k = 0; k < 5; k++) {
+                birds.push({ type: 'flock', x: Math.random() * width, y: height * 0.2 + Math.random() * (height * 0.2), speed: 0.2 });
             }
+        }
+
+        // STARS (Night)
+        stars = [];
+        const starCount = isMobile ? 40 : 100;
+        for (let i = 0; i < starCount; i++) {
+            stars.push({
+                x: Math.random() * width,
+                y: Math.random() * height * 0.8,
+                size: Math.random() * 1.5,
+                opacity: 0.2 + Math.random() * 0.6,
+                pulse: Math.random() * Math.PI
+            });
         }
     }
 
-    // --- Animation Loop ---
+    // --- Helpers ---
+    function getArcPosition(progress, startX, endX, apexY) {
+        // Quadratic Bezier or Sinusoidal Arc
+        // x moves linearly from startX to endX
+        // y arcs up to apexY at 0.5 progress
+        const x = startX + (endX - startX) * progress;
+        // Sin wave for height: sin(0)=0, sin(PI/2)=1, sin(PI)=0
+        const arcHeight = Math.sin(progress * Math.PI);
+        const y = (height * 0.7) - (arcHeight * apexY);
+        return { x, y };
+    }
 
-    function animate() {
-        // Update time
-        time += 0.03;
+    // --- Drawing ---
 
-        const width = canvas.logicalWidth;
-        const height = canvas.logicalHeight;
+    function drawClouds() {
+        ctx.fillStyle = CONFIG.colors.cloud;
+        clouds.forEach(c => {
+            c.x += c.speed;
+            if (c.x > width + 100) c.x = -100;
 
-        // 1. Clear Canvas
-        ctx.fillStyle = CONFIG.bgColor;
+            ctx.beginPath();
+            if (c.shape === 0) { // Cumulus
+                ctx.arc(c.x, c.y, 20 * c.size, 0, Math.PI * 2);
+                ctx.arc(c.x + 25 * c.size, c.y - 10 * c.size, 25 * c.size, 0, Math.PI * 2);
+                ctx.arc(c.x + 50 * c.size, c.y, 20 * c.size, 0, Math.PI * 2);
+            } else if (c.shape === 1) { // Stratus
+                ctx.ellipse(c.x, c.y, 60 * c.size, 15 * c.size, 0, 0, Math.PI * 2);
+            } else { // Cirrus
+                ctx.rect(c.x, c.y, 80 * c.size, 4 * c.size); // Stylized minimal
+            }
+            ctx.fill();
+        });
+    }
+
+    function drawBirds(timeVal) {
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.5)';
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
+
+        birds.forEach(b => {
+            // Logic varies by type
+            if (b.type === 'soar') {
+                b.x += b.speed;
+                if (b.x > width + 50) b.x = -50;
+
+                // Slow glide wave
+                const yOff = Math.sin(timeVal * 0.001) * 10;
+                ctx.beginPath();
+                ctx.moveTo(b.x - 5, b.y + yOff);
+                ctx.quadraticCurveTo(b.x, b.y + yOff - 2, b.x + 5, b.y + yOff);
+                ctx.stroke();
+            }
+            else if (b.type === 'direct') {
+                b.x += b.speed;
+                if (b.x < -50) b.x = width + 50;
+
+                // Flap
+                const flap = Math.sin(timeVal * 0.01 + b.wing) * 3;
+                ctx.beginPath();
+                ctx.moveTo(b.x - 3, b.y - flap);
+                ctx.lineTo(b.x, b.y);
+                ctx.lineTo(b.x + 3, b.y - flap);
+                ctx.stroke();
+            }
+            else if (b.type === 'flock') {
+                b.x += b.speed;
+                if (b.x > width + 20) b.x = -20;
+                ctx.beginPath(); ctx.arc(b.x, b.y, 1, 0, Math.PI * 2); ctx.fill();
+            }
+        });
+    }
+
+    function drawStars(timeVal) {
+        stars.forEach(s => {
+            // Gentle shimmering (non-blinking)
+            const shimmer = Math.sin(timeVal * 0.002 + s.pulse) * 0.2 + 0.8;
+            ctx.fillStyle = `rgba(255, 255, 255, ${s.opacity * shimmer})`;
+            ctx.beginPath();
+            ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
+            ctx.fill();
+        });
+    }
+
+    function drawComet() {
+        // Random rare spawn logic controlled externally or purely random here
+        if (Math.random() < 0.002) { // Rare
+            comets.push({ x: width * 0.8 + Math.random() * 200, y: 0, vx: -2, vy: 1, alpha: 1 });
+        }
+
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.)';
+
+        for (let i = comets.length - 1; i >= 0; i--) {
+            const c = comets[i];
+            c.x += c.vx;
+            c.y += c.vy;
+            c.alpha -= 0.005;
+
+            if (c.alpha <= 0) {
+                comets.splice(i, 1);
+                continue;
+            }
+
+            // Draw
+            const grad = ctx.createLinearGradient(c.x, c.y, c.x - c.vx * 10, c.y - c.vy * 10);
+            grad.addColorStop(0, `rgba(255, 255, 255, ${c.alpha})`);
+            grad.addColorStop(1, 'rgba(255, 255, 255, 0)');
+
+            ctx.beginPath();
+            ctx.strokeStyle = grad;
+            ctx.lineWidth = 1;
+            ctx.moveTo(c.x, c.y);
+            ctx.lineTo(c.x + 40, c.y - 20); // Tail
+            ctx.stroke();
+        }
+    }
+
+    // --- Main Loop ---
+    function animate(timestamp) {
+        if (!lastTime) lastTime = timestamp;
+        const delta = timestamp - lastTime;
+
+        // Progress Cycle (0 to 1 over 5 mins)
+        // Using modulo to loop seamlessly
+        cycleProgress = (timestamp % CONFIG.cycleDuration) / CONFIG.cycleDuration;
+
+        // 1. Background
+        const colors = isDay ? CONFIG.colors.daySky : CONFIG.colors.nightSky;
+        const grad = ctx.createLinearGradient(0, 0, 0, height);
+        grad.addColorStop(0, colors.top);
+        grad.addColorStop(1, colors.bottom);
+        ctx.fillStyle = grad;
         ctx.fillRect(0, 0, width, height);
 
-        // 2. Update Node Positions
-        nodes.forEach(node => {
-            // Vertical wave
-            node.y = node.baseY + Math.sin(time + node.phase) * CONFIG.waveAmplitude;
-            // Horizontal wave
-            node.x = node.baseX + Math.cos(time * 0.7 + node.phaseX) * CONFIG.horizontalAmplitude;
-        });
+        // 2. Celestial Body (Sun or Moon)
+        const orbPos = getArcPosition(cycleProgress, -100, width + 100, height * 0.5);
 
-        // 3. Draw Connections
-        ctx.lineWidth = 1;
+        // Glow
+        const glowRadius = isDay ? 60 : 40;
+        const glowColor = isDay ? 'rgba(255, 251, 235, 0.15)' : 'rgba(240, 244, 248, 0.1)';
 
-        for (let i = 0; i < nodes.length; i++) {
-            for (let j = i + 1; j < nodes.length; j++) {
-                const nodeA = nodes[i];
-                const nodeB = nodes[j];
+        const orbGrad = ctx.createRadialGradient(orbPos.x, orbPos.y, 10, orbPos.x, orbPos.y, glowRadius);
+        orbGrad.addColorStop(0, glowColor);
+        orbGrad.addColorStop(1, 'rgba(0,0,0,0)');
+        ctx.fillStyle = orbGrad;
+        ctx.beginPath(); ctx.arc(orbPos.x, orbPos.y, glowRadius, 0, Math.PI * 2); ctx.fill();
 
-                const dx = nodeA.x - nodeB.x;
-                const dy = nodeA.y - nodeB.y;
-                const dist = Math.sqrt(dx * dx + dy * dy);
+        // Core
+        ctx.fillStyle = isDay ? CONFIG.colors.sun : CONFIG.colors.moon;
+        ctx.beginPath(); ctx.arc(orbPos.x, orbPos.y, isDay ? 15 : 12, 0, Math.PI * 2); ctx.fill();
 
-                if (dist < CONFIG.connectionDistance) {
-                    // Opacity calculation based on distance
-                    // opacity = (1 - distance/200) * 0.3
-                    const opacity = (1 - dist / CONFIG.connectionDistance) * 0.3;
-
-                    ctx.strokeStyle = `rgba(${CONFIG.lineBaseColor}, ${opacity})`;
-                    ctx.beginPath();
-                    ctx.moveTo(nodeA.x, nodeA.y);
-                    ctx.lineTo(nodeB.x, nodeB.y);
-                    ctx.stroke();
-                }
-            }
+        // 3. Atmosphere
+        if (isDay) {
+            drawClouds();
+            drawBirds(timestamp);
+        } else {
+            drawStars(timestamp);
+            drawComet();
         }
-
-        // 4 & 5. Draw Nodes (Glow and Core)
-        nodes.forEach(node => {
-            // Outer Glow
-            ctx.fillStyle = 'rgba(255, 255, 255, 0.2)';
-            ctx.beginPath();
-            ctx.arc(node.x, node.y, CONFIG.nodeSize * 2, 0, Math.PI * 2);
-            ctx.fill();
-
-            // Inner Core
-            ctx.fillStyle = CONFIG.nodeColor;
-            ctx.beginPath();
-            ctx.arc(node.x, node.y, CONFIG.nodeSize, 0, Math.PI * 2);
-            ctx.fill();
-        });
 
         requestAnimationFrame(animate);
     }
 
-    // --- Start ---
-    window.addEventListener('resize', resizeCanvas);
-    resizeCanvas(); // This also triggers initNodes
-    requestAnimationFrame(animate);
+    init();
 
 })();

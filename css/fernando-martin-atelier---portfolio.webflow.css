@@ -2329,8 +2329,8 @@ blockquote {
   }
 
   .top-logo {
-    height: 31vh;
-    min-height: 300px;
+    height: 60vh;
+    min-height: 400px;
   }
 
   .main-image.sixth {
@@ -2638,8 +2638,8 @@ blockquote {
   }
 
   .top-logo {
-    height: 25vh;
-    min-height: 200px;
+    height: 55vh;
+    min-height: 350px;
   }
 
   .services-image-wrapper {
@@ -3014,8 +3014,9 @@ a:hover {
   /* Navigation Fixes */
   .navigation-wrapper-main {
     mix-blend-mode: normal;
-    background-color: #fff;
-    /* Ensure visibility */
+    height: 70px;
+    background-color: transparent;
+    /* Transparent for unified sky */
   }
 
   .navlinks {
