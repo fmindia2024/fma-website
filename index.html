@@ -375,35 +375,68 @@
         @media (max-width: 768px) {
           .client-testimonials {
             padding: 60px 0 80px 0;
+            overflow: visible;
+            /* Allow bleed */
           }
 
-          /* Fix Heading Font Size */
+          /* CRITICAL: FIX CONTAINER WIDTH */
+          /* Ensure the container doesn't constrain the full-width carousel */
+          .client-testimonials .container {
+            width: 100%;
+            max-width: 100%;
+            overflow: hidden;
+            /* Prevent horizontal page scroll, but allow inner carousel */
+            padding: 0;
+          }
+
+          /* Fix Heading Font Size & Animation */
           .testimonial-header {
-            margin-bottom: 40px;
+            margin-bottom: 30px;
             text-align: center;
             padding: 0 20px;
+
+            /* DISABLE SCROLL ANIMATION ON MOBILE */
+            opacity: 1 !important;
+            transform: none !important;
+            transition: none !important;
           }
 
           .testimonial-header h2 {
-            font-size: 32px !important;
+            font-size: 28px !important;
             /* Mobile Size */
             line-height: 1.2;
             word-wrap: break-word;
           }
 
+          .testimonial-header div[style*="height: 2px"] {
+            margin: 15px 0 !important;
+          }
+
           /* Carousel Layout */
+          /* CRITICAL: SCROLL CONTAINER SETUP */
           .testimonial-grid {
             display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+
             overflow-x: auto;
+            overflow-y: hidden;
+
             scroll-snap-type: x mandatory;
-            padding-bottom: 40px;
-            gap: 16px;
             -webkit-overflow-scrolling: touch;
+            /* iOS Momentum */
+            scroll-behavior: smooth;
+
+            width: 100vw;
+            /* Full Viewport Width */
+            gap: 16px;
+            padding: 0 20px 40px 20px;
+            /* Right padding for end snap, Bottom for shadow */
+            margin: 0;
+
+            /* Hide Scrollbar */
             scrollbar-width: none;
-            margin-right: 0;
-            padding-right: 20px;
-            padding-left: 20px;
-            /* Align start */
+            -ms-overflow-style: none;
           }
 
           .testimonial-grid::-webkit-scrollbar {
@@ -412,13 +445,20 @@
 
           .testimonial-card {
             flex: 0 0 85vw;
-            /* 90-85% width */
+            /* 85% Width */
+            min-width: 85vw;
+            max-width: 85vw;
+
             scroll-snap-align: center;
+            scroll-snap-stop: always;
+
             height: auto;
             min-height: auto;
+
+            /* DISABLE ANIMATION ON MOBILE */
             transform: none !important;
-            /* Disable scroll animation for reliability on simple carousel */
             opacity: 1 !important;
+            transition: none !important;
           }
 
           /* Adjust Card Content for Mobile */
@@ -444,7 +484,9 @@
             display: flex;
             justify-content: center;
             gap: 8px;
-            margin-top: 10px;
+            margin-top: -10px;
+            /* Pull up closer */
+            padding-bottom: 20px;
           }
 
           .dot {
