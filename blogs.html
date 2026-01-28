@@ -158,82 +158,156 @@
 
     <!-- Footer (Copied from index.html) -->
     <div class="footer">
-        <div class="container">
-            <div class="grid-2-column reverse">
-                <div>
-                    <h2 class="display-1 second _5rem" style="color: #fff;">Collaborate with us to create architecture
-                        with clarity and purpose</h2>
+        <div class="container" style="opacity: 0; transform: translateY(30px); transition: all 0.8s ease;"
+            id="footerContent">
+            <!-- Main Footer Content -->
+            <div class="grid-2-column reverse" style="align-items: flex-start; margin-bottom: 80px;">
+                <!-- Left: Big CTA -->
+                <div style="max-width: 600px;">
+                    <!-- Hover effect for CTA text -->
+                    <h2 class="display-1 second _5rem" style="color: #fff; line-height: 1.1; transition: color 0.3s;"
+                        onmouseover="this.style.color='#00ff88'" onmouseout="this.style.color='#ffffff'">
+                        Collaborate with us to create architecture with clarity and purpose
+                    </h2>
                 </div>
-                <div class="grid-2-column">
-                    <div id="w-node-a1aafccb-4331-a733-4b8d-24cbb3e4ecd1-b3e4ecca">
-                        <h3 class="display-1 second _1-7-rem" style="color: #ccc;">Fernando Martin Atelier<br>Street
-                            Address<br>City, Country, Postal
-                            Code</h3>
-                        <div class="margin-20">
-                            <h3 class="display-1 second _1-7-rem" style="color: #ccc;">info@fmarchitects.in</h3>
-                            <div class="margin-10">
-                                <h3 class="display-1 second _1-7-rem" style="color: #ccc;">+91 75599 77441</h3>
-                            </div>
+
+                <!-- Right: Contact Info -->
+                <div class="phone-vertical"
+                    style="display: flex; width: 100%; justify-content: flex-end; text-align: left;">
+                    <div style="display: flex; flex-direction: column; gap: 30px; text-align: left;">
+                        <!-- Brand & Address -->
+                        <div style="color: #fff; font-size: 1.1rem; line-height: 1.6;">
+                            <strong style="font-size: 1.25rem; display: block; margin-bottom: 8px;">Fernando Martin
+                                Atelier</strong>
+                            <span style="color: #ccc;">Street Address<br>City, Country, Postal Code</span>
+                        </div>
+
+                        <!-- Contact Details -->
+                        <div style="display: flex; flex-direction: column; gap: 8px;">
+                            <a href="mailto:info@fmarchitects.in"
+                                style="color: #fff; text-decoration: none; font-size: 1.1rem; transition: color 0.3s;"
+                                onmouseover="this.style.color='#00ff88'"
+                                onmouseout="this.style.color='#ffffff'">info@fmarchitects.in</a>
+                            <a href="tel:+917559977441"
+                                style="color: #fff; text-decoration: none; font-size: 1.1rem; transition: color 0.3s;"
+                                onmouseover="this.style.color='#00ff88'" onmouseout="this.style.color='#ffffff'">+91
+                                75599 77441</a>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="margin-80 make-40">
-                <div class="navigation-grid">
-                    <a href="projects.html" data-wf--nav-item--variant="big"
-                        class="navigation-link w-variant-c88d97d7-2cae-93c7-4d4a-436a02b27614 w-inline-block">
-                        <div class="nav-text first">Projects</div>
-                        <div class="nav-text second">Projects</div>
-                    </a>
-                    <a href="about.html" data-wf--nav-item--variant="big"
-                        class="navigation-link w-variant-c88d97d7-2cae-93c7-4d4a-436a02b27614 w-inline-block">
-                        <div class="nav-text first">About Us</div>
-                        <div class="nav-text second">About Us</div>
-                    </a>
-                    <a href="blogs.html" data-wf--nav-item--variant="big"
-                        class="navigation-link w-variant-c88d97d7-2cae-93c7-4d4a-436a02b27614 w-inline-block">
-                        <div class="nav-text first">Blogs</div>
-                        <div class="nav-text second">Journal</div>
-                    </a>
-                    <a href="https://wa.me/917559977441" target="_blank" data-wf--nav-item--variant="big"
-                        class="navigation-link w-variant-c88d97d7-2cae-93c7-4d4a-436a02b27614 w-inline-block">
-                        <div class="nav-text first">Contact Us</div>
-                        <div class="nav-text second">Contact Us</div>
-                    </a>
-                    <div>
-                        <div class="social-content left">
-                            <a href="https://www.twitter.com/" target="_blank"
-                                class="social-wrapper w-inline-block"><img width="18" loading="lazy" alt=""
-                                    src="images/twitter-3.png" class="social-icon second"><img width="18" loading="lazy"
-                                    alt="" src="images/twitter-3.png" class="social-icon second"></a>
-                            <a href="https://www.instagram.com/fma.in" target="_blank"
-                                class="social-wrapper w-inline-block"><img width="18" loading="lazy" alt=""
-                                    src="images/instagram-5.png" class="social-icon"><img width="18" loading="lazy"
-                                    alt="" src="images/instagram-5.png" class="social-icon"></a>
-                            <a href="https://www.threads.net/@fma.in" target="_blank"
-                                class="social-wrapper w-inline-block"><img width="18" loading="lazy" alt=""
-                                    src="images/threads-3.png" class="social-icon"><img width="18" loading="lazy" alt=""
-                                    src="images/threads-3.png" class="social-icon"></a>
-                            <a href="https://wa.me/917559977441" target="_blank"
-                                class="social-wrapper w-inline-block"><img width="18" loading="lazy" alt=""
-                                    src="images/whatsapp-2.png" class="social-icon"><img width="18" loading="lazy"
-                                    alt="" src="images/whatsapp-2.png" class="social-icon"></a>
-                        </div>
-                    </div>
+
+            <!-- Divider -->
+            <div class="line-divider" style="background-color: rgba(255,255,255,0.1); margin-bottom: 40px;"></div>
+
+            <!-- Navigation & Socials Row -->
+            <div class="navigation-grid"
+                style="grid-template-columns: repeat(4, auto) 1fr; align-items: center; gap: 40px; margin-bottom: 60px;">
+                <!-- Nav Links with Green Hover -->
+                <a href="projects.html" class="footer-nav-link"
+                    style="text-decoration: none; color: #fff; font-size: 1rem; transition: color 0.3s;">Projects</a>
+                <a href="about.html" class="footer-nav-link"
+                    style="text-decoration: none; color: #fff; font-size: 1rem; transition: color 0.3s;">About Us</a>
+                <a href="blogs.html" class="footer-nav-link"
+                    style="text-decoration: none; color: #fff; font-size: 1rem; transition: color 0.3s;">Blogs</a>
+                <a href="contact.html" class="footer-nav-link"
+                    style="text-decoration: none; color: #fff; font-size: 1rem; transition: color 0.3s;">Contact Us</a>
+
+                <!-- Social Icons (Right Aligned) -->
+                <div class="social-content left" style="width: auto; margin-left: auto; display: flex; gap: 20px;">
+                    <a href="https://www.twitter.com/" target="_blank" class="social-icon-link"
+                        style="opacity: 0.8; transition: opacity 0.3s;"><img width="20" loading="lazy" alt="Twitter"
+                            src="images/twitter-3.png"></a>
+                    <a href="https://www.instagram.com/fma.in" target="_blank" class="social-icon-link"
+                        style="opacity: 0.8; transition: opacity 0.3s;"><img width="20" loading="lazy" alt="Instagram"
+                            src="images/instagram-5.png"></a>
+                    <a href="https://www.threads.net/@fma.in" target="_blank" class="social-icon-link"
+                        style="opacity: 0.8; transition: opacity 0.3s;"><img width="20" loading="lazy" alt="Threads"
+                            src="images/threads-3.png"></a>
+                    <a href="https://wa.me/917559977441" target="_blank" class="social-icon-link"
+                        style="opacity: 0.8; transition: opacity 0.3s;"><img width="20" loading="lazy" alt="WhatsApp"
+                            src="images/whatsapp-2.png"></a>
                 </div>
             </div>
-            <div class="line-divider"></div>
-            <div class="margin-80 make-40">
-                <div class="navigation-grid _1-column">
-                    <a href="https://www.webflow.com/" id="w-node-a1aafccb-4331-a733-4b8d-24cbb3e4ecf2-b3e4ecca"
-                        target="_blank" class="navigation-link for-footer gray-color w-inline-block">
-                        <div class="nav-text first">© Fernando Martin Atelier<br></div>
-                        <div class="nav-text second">© Flowmance, Powered by Webflow</div>
-                    </a>
-                </div>
+
+            <!-- Copyright Row -->
+            <div
+                style="display: flex; justify-content: space-between; align-items: center; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.05); color: #666; font-size: 0.9rem;">
+                <div>© 2026 Fernando Martin Atelier. All Rights Reserved.</div>
+                <div style="color: #666;">Architecture & Design Studio</div>
             </div>
         </div>
+
+        <!-- Inline Styles for Hovers & Animations that CSS files might miss -->
+        <style>
+            .footer-nav-link:hover {
+                color: #00ff88 !important;
+            }
+
+            .social-icon-link:hover {
+                opacity: 1 !important;
+                transform: translateY(-3px);
+            }
+        </style>
+
+        <!-- Intersection Observer for Footer Animation -->
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                const footerContent = document.getElementById('footerContent');
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.style.opacity = '1';
+                            entry.target.style.transform = 'translateY(0)';
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.2 });
+                if (footerContent) observer.observe(footerContent);
+            });
+        </script>
     </div>
+
+    <!-- Divider -->
+    <div class="line-divider" style="background-color: rgba(255,255,255,0.1); margin-bottom: 40px;"></div>
+
+    <!-- Navigation & Socials Row -->
+    <div class="navigation-grid"
+        style="grid-template-columns: repeat(4, auto) 1fr; align-items: center; gap: 40px; margin-bottom: 60px;">
+        <a href="projects.html" class="footer-nav-link"
+            style="text-decoration: none; color: #fff; font-size: 1rem; transition: color 0.3s;">Projects</a>
+        <a href="about.html" class="footer-nav-link"
+            style="text-decoration: none; color: #fff; font-size: 1rem; transition: color 0.3s;">About Us</a>
+        <a href="blogs.html" class="footer-nav-link"
+            style="text-decoration: none; color: #fff; font-size: 1rem; transition: color 0.3s;">Blogs</a>
+        <a href="contact.html" class="footer-nav-link"
+            style="text-decoration: none; color: #fff; font-size: 1rem; transition: color 0.3s;">Contact Us</a>
+
+        <div class="social-content left" style="width: auto; margin-left: auto; display: flex; gap: 20px;">
+            <a href="https://www.twitter.com/" target="_blank" class="social-icon-link"
+                style="opacity: 0.8; transition: opacity 0.3s;"><img width="20" loading="lazy" alt="Twitter"
+                    src="images/twitter-3.png"></a>
+            <a href="https://www.instagram.com/fma.in" target="_blank" class="social-icon-link"
+                style="opacity: 0.8; transition: opacity 0.3s;"><img width="20" loading="lazy" alt="Instagram"
+                    src="images/instagram-5.png"></a>
+            <a href="https://www.threads.net/@fma.in" target="_blank" class="social-icon-link"
+                style="opacity: 0.8; transition: opacity 0.3s;"><img width="20" loading="lazy" alt="Threads"
+                    src="images/threads-3.png"></a>
+            <a href="https://wa.me/917559977441" target="_blank" class="social-icon-link"
+                style="opacity: 0.8; transition: opacity 0.3s;"><img width="20" loading="lazy" alt="WhatsApp"
+                    src="images/whatsapp-2.png"></a>
+        </div>
+    </div>
+
+    <!-- Copyright Row -->
+    <div
+        style="display: flex; justify-content: space-between; align-items: center; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.05); color: #666; font-size: 0.9rem;">
+        <div>© 2026 Fernando Martin Atelier. All Rights Reserved.</div>
+        <div style="color: #666;">Architecture & Design Studio</div>
+    </div>
+    </div>
+
+
 
     <!-- Scripts -->
     <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=695385806407bf076d725963"

@@ -48,8 +48,10 @@ body {
 }
 
 .contact-card {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid var(--contact-border);
+    background: rgba(255, 255, 255, 0.08);
+    /* Increased visibility */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    /* Stronger border */
     padding: 40px;
     border-radius: 4px;
     transition: all 0.3s ease;
@@ -60,8 +62,8 @@ body {
 }
 
 .contact-card:hover {
-    background: rgba(255, 255, 255, 0.05);
-    border-color: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.4);
     transform: translateY(-5px);
 }
 

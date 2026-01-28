@@ -166,64 +166,64 @@
 
     <!-- Footer -->
     <div class="footer">
-        <div class="container">
-            <div class="grid-2-column reverse">
-                <div>
-                    <h2 class="display-1 second _5rem" style="color: #fff;">Let's build something timeless.</h2>
-                </div>
-                <div class="grid-2-column">
-                    <div>
-                        <h3 class="display-1 second _1-7-rem" style="color: #ccc;">Fernando Martin
-                            Atelier<br>info@fmarchitects.in<br>+91 75599 77441</h3>
-                    </div>
-                </div>
-            </div>
-            <div class="margin-80 make-40">
-                <div class="navigation-grid">
-                    <a href="projects.html" class="navigation-link for-footer w-inline-block">
-                        <div class="nav-text first">Projects</div>
-                        <div class="nav-text second">Projects</div>
-                    </a>
-                    <a href="about.html" class="navigation-link for-footer w-inline-block">
-                        <div class="nav-text first">About Us</div>
-                        <div class="nav-text second">About Us</div>
-                    </a>
-                    <a href="blogs.html" class="navigation-link for-footer w-inline-block">
-                        <div class="nav-text first">Journal</div>
-                        <div class="nav-text second">Journal</div>
-                    </a>
-                    <a href="contact.html" aria-current="page"
-                        class="navigation-link for-footer w-inline-block w--current">
-                        <div class="nav-text first">Contact Us</div>
-                        <div class="nav-text second">Contact Us</div>
-                    </a>
-                </div>
-                <div class="social-content left" style="margin-top: 40px;">
-                    <a href="https://www.twitter.com/" target="_blank" class="social-wrapper w-inline-block"><img
-                            width="18" loading="lazy" alt="" src="images/twitter-3.png" class="social-icon second"><img
-                            width="18" loading="lazy" alt="" src="images/twitter-3.png" class="social-icon second"></a>
-                    <a href="https://www.instagram.com/fma.in" target="_blank"
-                        class="social-wrapper w-inline-block"><img width="18" loading="lazy" alt=""
-                            src="images/instagram-5.png" class="social-icon"><img width="18" loading="lazy" alt=""
-                            src="images/instagram-5.png" class="social-icon"></a>
-                    <a href="https://www.threads.net/@fma.in" target="_blank" class="social-wrapper w-inline-block"><img
-                            width="18" loading="lazy" alt="" src="images/threads-3.png" class="social-icon"><img
-                            width="18" loading="lazy" alt="" src="images/threads-3.png" class="social-icon"></a>
-                    <a href="https://wa.me/917559977441" target="_blank" class="social-wrapper w-inline-block"><img
-                            width="18" loading="lazy" alt="" src="images/whatsapp-2.png" class="social-icon"><img
-                            width="18" loading="lazy" alt="" src="images/whatsapp-2.png" class="social-icon"></a>
-                </div>
-            </div>
-            <div class="line-divider"></div>
-            <div class="margin-80 make-40">
-                <div class="navigation-grid _1-column">
-                    <a href="#" class="navigation-link for-footer gray-color w-inline-block">
-                        <div class="nav-text first">© Fernando Martin Atelier</div>
-                        <div class="nav-text second">© Flowmance</div>
-                    </a>
-                </div>
-            </div>
+        style="text-decoration: none; color: #fff; font-size: 1rem; transition: color 0.3s;">Projects</a>
+        <a href="about.html" class="footer-nav-link"
+            style="text-decoration: none; color: #fff; font-size: 1rem; transition: color 0.3s;">About Us</a>
+        <a href="blogs.html" class="footer-nav-link"
+            style="text-decoration: none; color: #fff; font-size: 1rem; transition: color 0.3s;">Blogs</a>
+        <a href="contact.html" class="footer-nav-link"
+            style="text-decoration: none; color: #fff; font-size: 1rem; transition: color 0.3s;">Contact Us</a>
+
+        <div class="social-content left" style="width: auto; margin-left: auto; display: flex; gap: 20px;">
+            <a href="https://www.twitter.com/" target="_blank" class="social-icon-link"
+                style="opacity: 0.8; transition: opacity 0.3s;"><img width="20" loading="lazy" alt="Twitter"
+                    src="images/twitter-3.png"></a>
+            <a href="https://www.instagram.com/fma.in" target="_blank" class="social-icon-link"
+                style="opacity: 0.8; transition: opacity 0.3s;"><img width="20" loading="lazy" alt="Instagram"
+                    src="images/instagram-5.png"></a>
+            <a href="https://www.threads.net/@fma.in" target="_blank" class="social-icon-link"
+                style="opacity: 0.8; transition: opacity 0.3s;"><img width="20" loading="lazy" alt="Threads"
+                    src="images/threads-3.png"></a>
+            <a href="https://wa.me/917559977441" target="_blank" class="social-icon-link"
+                style="opacity: 0.8; transition: opacity 0.3s;"><img width="20" loading="lazy" alt="WhatsApp"
+                    src="images/whatsapp-2.png"></a>
         </div>
+    </div>
+
+    <!-- Copyright Row -->
+    <div
+        style="display: flex; justify-content: space-between; align-items: center; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.05); color: #666; font-size: 0.9rem;">
+        <div>© 2026 Fernando Martin Atelier. All Rights Reserved.</div>
+        <div style="color: #666;">Architecture & Design Studio</div>
+    </div>
+    </div>
+
+    <style>
+        .footer-nav-link:hover {
+            color: #00ff88 !important;
+        }
+
+        .social-icon-link:hover {
+            opacity: 1 !important;
+            transform: translateY(-3px);
+        }
+    </style>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const footerContent = document.getElementById('footerContent');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.2 });
+            if (footerContent) observer.observe(footerContent);
+        });
+    </script>
     </div>
 
     <!-- Scripts -->
@@ -233,17 +233,40 @@
     <script src="js/mobile-menu.js"></script>
     <script src="https://cdn.prod.website-files.com/gsap/3.14.2/gsap.min.js"></script>
 
+    <style>
+        /* Card Animations */
+        .contact-card {
+            opacity: 0;
+            animation: cardFadeIn 0.8s ease-out forwards;
+        }
+
+        .contact-card:nth-child(1) {
+            animation-delay: 0.2s;
+        }
+
+        .contact-card:nth-child(2) {
+            animation-delay: 0.4s;
+        }
+
+        .contact-card:nth-child(3) {
+            animation-delay: 0.6s;
+        }
+
+        @keyframes cardFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            gsap.from(".contact-card", {
-                opacity: 0,
-                y: 30,
-                duration: 0.8,
-                stagger: 0.2,
-                ease: "power2.out",
-                delay: 0.2
-            });
-        });
+        // Animations handled by CSS for reliability
     </script>
 </body>
 
