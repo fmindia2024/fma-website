@@ -163,162 +163,459 @@
         </div>
       </div>
     </div>
-    <section class="section">
+    <section class="section client-testimonials"
+      style="background-color: #0b0d12; color: #fff; padding: 120px 0; overflow: hidden; position: relative;">
+      <style>
+        .client-testimonials .container {
+          max-width: 1200px;
+          margin: 0 auto;
+          position: relative;
+          z-index: 2;
+        }
+
+        /* --- Header Animation & Styling --- */
+        .testimonial-header {
+          margin-bottom: 70px;
+          opacity: 0;
+          transform: translateY(30px);
+          transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+          position: relative;
+          z-index: 5;
+        }
+
+        .testimonial-header h2 {
+          color: #fff;
+          margin-bottom: 20px;
+          line-height: 1.1;
+          font-family: 'Helvetica', sans-serif !important;
+        }
+
+        /* --- Grid Layout --- */
+        .testimonial-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 30px;
+          padding-bottom: 40px;
+          /* Space for shadows/hover lift */
+        }
+
+        /* --- Card Design --- */
+        .testimonial-card {
+          background-color: #1a1a1a;
+          border-radius: 12px;
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          /* Subtle border */
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+          transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+          opacity: 0;
+          transform: translateY(40px);
+          height: 100%;
+          overflow: hidden;
+          /* For image zoom */
+          position: relative;
+        }
+
+        /* --- Project Thumbnail --- */
+        .project-thumbnail-wrapper {
+          width: 100%;
+          height: 200px;
+          /* Consistent height */
+          overflow: hidden;
+          position: relative;
+          background-color: #222;
+          /* Placeholder color before load */
+        }
+
+        .project-thumbnail {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          transition: transform 0.6s ease;
+          opacity: 0;
+          /* Fade in on load */
+          animation: fadeInImage 0.5s ease-out forwards;
+        }
+
+        .thumbnail-overlay {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 60%;
+          background: linear-gradient(to top, rgba(26, 26, 26, 1), rgba(26, 26, 26, 0));
+          z-index: 1;
+        }
+
+        /* --- content --- */
+        .testimonial-content {
+          padding: 30px;
+          position: relative;
+          flex-grow: 1;
+          z-index: 2;
+        }
+
+        .quote-mark {
+          position: absolute;
+          top: 20px;
+          left: 20px;
+          font-size: 60px;
+          line-height: 1;
+          font-family: serif;
+          color: rgba(255, 255, 255, 0.1);
+          pointer-events: none;
+        }
+
+        .testimonial-quote {
+          font-family: 'Helvetica', sans-serif;
+          font-size: 1.125rem;
+          line-height: 1.6;
+          color: #e0e0e0;
+          margin: 0;
+          position: relative;
+          z-index: 2;
+          font-weight: 300;
+        }
+
+        /* --- Client Info Row --- */
+        .testimonial-client-row {
+          padding: 20px 30px;
+          background-color: rgba(255, 255, 255, 0.03);
+          /* Subtle separation */
+          border-top: 1px solid rgba(255, 255, 255, 0.05);
+          display: flex;
+          align-items: center;
+          gap: 15px;
+        }
+
+        .client-photo {
+          width: 60px;
+          height: 60px;
+          border-radius: 50%;
+          object-fit: cover;
+          border: 2px solid rgba(255, 255, 255, 0.1);
+          transition: border-color 0.3s ease;
+        }
+
+        .client-info {
+          display: flex;
+          flex-direction: column;
+        }
+
+        .author-name {
+          font-size: 1rem;
+          font-weight: 600;
+          color: #fff;
+          margin-bottom: 2px;
+        }
+
+        .project-type {
+          font-size: 0.75rem;
+          color: #999;
+          font-weight: 500;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+        }
+
+        /* --- Animations & States --- */
+        @keyframes fadeInImage {
+          from {
+            opacity: 0;
+          }
+
+          to {
+            opacity: 1;
+          }
+        }
+
+        .testimonial-card.scrolled-in {
+          opacity: 1;
+          transform: translateY(0);
+        }
+
+        /* Desktop Hover Effects */
+        @media (min-width: 1025px) {
+          .testimonial-card.scrolled-in:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+            border-color: rgba(255, 255, 255, 0.2);
+          }
+
+          .testimonial-card.scrolled-in:hover .project-thumbnail {
+            transform: scale(1.08);
+            /* Zoom effect */
+          }
+
+          .testimonial-card.scrolled-in:hover .client-photo {
+            border-color: rgba(255, 215, 0, 0.6);
+            /* Gold glow */
+          }
+        }
+
+        /* --- Tablet Responsiveness --- */
+        @media (max-width: 1024px) {
+          .testimonial-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+          }
+
+          /* Hide 3rd on tablet portrait if needed, or wrap standard */
+          .testimonial-card:last-child {
+            display: flex;
+            /* Keep all 3, it will wrap to next line or we hide one. Let's keep strict 2-col wrapper in mobile section below. Only vertical stacking here if needed.*/
+          }
+
+          /* Actually for tablet, 3 items in 2 columns leaves one hanging. Often better to scroll or hide. 
+              But let's stick to user request: "2-column grid". */
+        }
+
+        /* --- Mobile Responsiveness (Critical) --- */
+        @media (max-width: 768px) {
+          .client-testimonials {
+            padding: 60px 0 80px 0;
+          }
+
+          /* Fix Heading Font Size */
+          .testimonial-header {
+            margin-bottom: 40px;
+            text-align: center;
+            padding: 0 20px;
+          }
+
+          .testimonial-header h2 {
+            font-size: 32px !important;
+            /* Mobile Size */
+            line-height: 1.2;
+            word-wrap: break-word;
+          }
+
+          /* Carousel Layout */
+          .testimonial-grid {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            padding-bottom: 40px;
+            gap: 16px;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            margin-right: 0;
+            padding-right: 20px;
+            padding-left: 20px;
+            /* Align start */
+          }
+
+          .testimonial-grid::-webkit-scrollbar {
+            display: none;
+          }
+
+          .testimonial-card {
+            flex: 0 0 85vw;
+            /* 90-85% width */
+            scroll-snap-align: center;
+            height: auto;
+            min-height: auto;
+            transform: none !important;
+            /* Disable scroll animation for reliability on simple carousel */
+            opacity: 1 !important;
+          }
+
+          /* Adjust Card Content for Mobile */
+          .project-thumbnail-wrapper {
+            height: 180px;
+          }
+
+          .testimonial-content {
+            padding: 24px 20px;
+          }
+
+          .testimonial-quote {
+            font-size: 1rem;
+          }
+
+          .client-photo {
+            width: 50px;
+            height: 50px;
+          }
+
+          /* Dots */
+          .testimonial-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 10px;
+          }
+
+          .dot {
+            width: 8px;
+            height: 8px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transition: all 0.3s;
+          }
+
+          .dot.active {
+            background-color: #fff;
+            transform: scale(1.2);
+          }
+        }
+      </style>
+
       <div class="container">
-        <div>
-          <div class="grid-2-column reverse add-gap">
-            <div id="w-node-d79fa38c-8ecb-a176-9278-ba6c01f7913e-6d7259b3" class="max-w-left"
-              style="margin-bottom: 20vh;">
-              <h2 id="practice-text" class="display-1 second _5rem">Our
-                practice<br>‍<br><span class="smaller">spans multiple architectural disciplines, unified by a commitment
-                  to clarity, material integrity, and contextual design. Each service supports a holistic
-                  approach—ensuring every project is thoughtful, precise, and enduring.</span>‍</h2>
-              <div data-w-id="d79fa38c-8ecb-a176-9278-ba6c01f79147" style="opacity:0" class="margin-30 make-flex">
-                <div class="button-flex">
-                  <a href="mailto:info@fmarchitects.in" class="button-with-line invert w-inline-block">
-                    <div class="button-text-wrapper">
-                      <div class="button-text">Let&#x27;s Connect</div>
-                      <div class="button-text">Let&#x27;s Connect</div>
-                    </div>
-                    <div class="button-line-first">
-                      <div class="button-line-overlay"></div>
-                    </div>
-                  </a>
-                </div>
-              </div>
+        <div class="testimonial-header">
+          <h2 class="display-1 second _5rem">What Our Clients Say</h2>
+          <!-- Decorative line -->
+          <div
+            style="height: 2px; width: 60px; background: #FFD700; opacity: 1; margin: 20px 0; display: inline-block;">
+          </div>
+        </div>
+
+        <div class="testimonial-grid" id="testimonialGrid">
+
+          <!-- Card 1 -->
+          <div class="testimonial-card" style="transition-delay: 0s;">
+            <div class="project-thumbnail-wrapper">
+              <img src="images/photo-17-2_1photo-17-2.webp" alt="Bangalore Residence" class="project-thumbnail"
+                loading="lazy">
+              <div class="thumbnail-overlay"></div>
             </div>
-            <div class="servise-wrapper">
-              <div data-w-id="c2839d10-ba96-7988-8bad-d65fd19ecb18" class="service-item">
-                <div class="accordion-top">
-                  <div class="services-grid">
-                    <div class="services-title-wrapper">
-                      <div class="services-image-wrapper">
-                        <div class="services-image-aspect-ratio"><img src="images/image-1.png" loading="lazy" alt=""
-                            class="image-background"></div>
-                      </div>
-                      <div class="service-title">Architectural Design</div>
-                    </div>
-                    <div id="w-node-c2839d10-ba96-7988-8bad-d65fd19ecb21-d19ecb18" class="accortion-button">
-                      <div class="plus-wrapper">
-                        <div class="line-1"></div>
-                        <div class="line-2"></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="accordion-bottom">
-                  <div class="accordion-bottom-text">
-                    <p class="p-accortion">We develop architectural concepts grounded in site, program, and spatial
-                      logic—transforming ideas into coherent, buildable designs.</p>
-                  </div>
-                </div>
-              </div>
-              <div data-w-id="c2839d10-ba96-7988-8bad-d65fd19ecb18" class="service-item">
-                <div class="accordion-top">
-                  <div class="services-grid">
-                    <div class="services-title-wrapper">
-                      <div class="services-image-wrapper">
-                        <div class="services-image-aspect-ratio"><img src="images/image-2.png" loading="lazy" alt=""
-                            class="image-background"></div>
-                      </div>
-                      <div class="service-title">Residential Architecture</div>
-                    </div>
-                    <div id="w-node-c2839d10-ba96-7988-8bad-d65fd19ecb21-d19ecb18" class="accortion-button">
-                      <div class="plus-wrapper">
-                        <div class="line-1"></div>
-                        <div class="line-2"></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="accordion-bottom">
-                  <div class="accordion-bottom-text">
-                    <p class="p-accortion">Custom homes and private residences designed with attention to lifestyle,
-                      light, materiality, and long-term comfort.</p>
-                  </div>
-                </div>
-              </div>
-              <div data-w-id="c2839d10-ba96-7988-8bad-d65fd19ecb18" class="service-item">
-                <div class="accordion-top">
-                  <div class="services-grid">
-                    <div class="services-title-wrapper">
-                      <div class="services-image-wrapper">
-                        <div class="services-image-aspect-ratio"><img src="images/image-3.png" loading="lazy" alt=""
-                            class="image-background"></div>
-                      </div>
-                      <div class="service-title">Commercial Architecture</div>
-                    </div>
-                    <div id="w-node-c2839d10-ba96-7988-8bad-d65fd19ecb21-d19ecb18" class="accortion-button">
-                      <div class="plus-wrapper">
-                        <div class="line-1"></div>
-                        <div class="line-2"></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="accordion-bottom">
-                  <div class="accordion-bottom-text">
-                    <p class="p-accortion">Workspaces, retail, and mixed-use projects shaped to support functionality,
-                      identity, and efficient spatial planning.</p>
-                  </div>
-                </div>
-              </div>
-              <div data-w-id="c2839d10-ba96-7988-8bad-d65fd19ecb18" class="service-item">
-                <div class="accordion-top">
-                  <div class="services-grid">
-                    <div class="services-title-wrapper">
-                      <div class="services-image-wrapper">
-                        <div class="services-image-aspect-ratio"><img src="images/image-4.png" loading="lazy" alt=""
-                            class="image-background"></div>
-                      </div>
-                      <div class="service-title">Design Development &amp; Documentation</div>
-                    </div>
-                    <div id="w-node-c2839d10-ba96-7988-8bad-d65fd19ecb21-d19ecb18" class="accortion-button">
-                      <div class="plus-wrapper">
-                        <div class="line-1"></div>
-                        <div class="line-2"></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="accordion-bottom">
-                  <div class="accordion-bottom-text">
-                    <p class="p-accortion">Detailed drawings and technical documentation that translate design intent
-                      into
-                      precise, construction-ready outcomes.</p>
-                  </div>
-                </div>
-              </div>
-              <div data-w-id="c2839d10-ba96-7988-8bad-d65fd19ecb18" class="service-item">
-                <div class="accordion-top">
-                  <div class="services-grid">
-                    <div class="services-title-wrapper">
-                      <div class="services-image-wrapper">
-                        <div class="services-image-aspect-ratio"><img src="images/image-5.png" loading="lazy" alt=""
-                            class="image-background"></div>
-                      </div>
-                      <div class="service-title">Site Coordination</div>
-                    </div>
-                    <div id="w-node-c2839d10-ba96-7988-8bad-d65fd19ecb21-d19ecb18" class="accortion-button">
-                      <div class="plus-wrapper">
-                        <div class="line-1"></div>
-                        <div class="line-2"></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="accordion-bottom">
-                  <div class="accordion-bottom-text">
-                    <p class="p-accortion">Ongoing collaboration with consultants and contractors to ensure design
-                      quality
-                      is maintained through execution.</p>
-                  </div>
-                </div>
+            <div class="testimonial-content">
+              <div class="quote-mark">“</div>
+              <p class="testimonial-quote">Fernando Martin Atelier transformed our vision into reality. Their attention
+                to detail and understanding of context created a home that feels both timeless and contemporary.</p>
+            </div>
+            <div class="testimonial-client-row">
+              <img src="images/team-architect-male.png" alt="Rajesh Kumar" class="client-photo" loading="lazy">
+              <div class="client-info">
+                <span class="author-name">Rajesh Kumar</span>
+                <span class="project-type">Bangalore Residence</span>
               </div>
             </div>
           </div>
+
+          <!-- Card 2 -->
+          <div class="testimonial-card" style="transition-delay: 0.2s;">
+            <div class="project-thumbnail-wrapper">
+              <img src="images/bcdf_studio_atelier_steve_bichat-53-scaled-1010x673.jpg" alt="Ayurvedic Clinic"
+                class="project-thumbnail" loading="lazy">
+              <div class="thumbnail-overlay"></div>
+            </div>
+            <div class="testimonial-content">
+              <div class="quote-mark">“</div>
+              <p class="testimonial-quote">Working with FMA was seamless. Their documentation and coordination ensured
+                our commercial project stayed on schedule and exceeded expectations.</p>
+            </div>
+            <div class="testimonial-client-row">
+              <img src="images/team-architect-female.png" alt="Priya Menon" class="client-photo" loading="lazy">
+              <div class="client-info">
+                <span class="author-name">Priya Menon</span>
+                <span class="project-type">Ayurvedic Clinic</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="testimonial-card" style="transition-delay: 0.4s;">
+            <div class="project-thumbnail-wrapper">
+              <img src="images/Bergerie-Atelier-Steve-color©Sylvain-Alessandri44-scaled-1010x1515.jpg"
+                alt="Kodaikanal Weekend Home" class="project-thumbnail" loading="lazy">
+              <div class="thumbnail-overlay"></div>
+            </div>
+            <div class="testimonial-content">
+              <div class="quote-mark">“</div>
+              <p class="testimonial-quote">The team's approach to sustainable design and material integrity resulted in
+                a space that honors tradition while embracing modern living.</p>
+            </div>
+            <div class="testimonial-client-row">
+              <img src="images/juan-suarez-botas.png" alt="Arjun Nair" class="client-photo" loading="lazy">
+              <div class="client-info">
+                <span class="author-name">Arjun Nair</span>
+                <span class="project-type">Kodaikanal Weekend Home</span>
+              </div>
+            </div>
+          </div>
+
         </div>
+
+        <div class="testimonial-dots" id="testimonialDots"></div>
       </div>
+
+      <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+          // 1. Scroll Fade-In Animation (Desktop/Tablet mainly)
+          const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('scrolled-in');
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+                observer.unobserve(entry.target);
+              }
+            });
+          }, { threshold: 0.1 });
+
+          const header = document.querySelector('.testimonial-header');
+          const cards = document.querySelectorAll('.testimonial-card');
+
+          if (header) {
+            observer.observe(header);
+          }
+
+          // Only observe cards for stagger effect if not on mobile (mobile uses snap scroll)
+          if (window.innerWidth > 768) {
+            cards.forEach(card => observer.observe(card));
+          } else {
+            // Force visible on active mobile load to avoid blank carousel
+            cards.forEach(card => {
+              card.style.opacity = '1';
+              card.style.transform = 'none';
+            });
+
+            if (header) {
+              // Fallback for header on mobile
+              setTimeout(() => { header.style.opacity = '1'; header.style.transform = 'translateY(0)'; }, 100);
+            }
+          }
+
+          // 2. Mobile Logic
+          if (window.innerWidth <= 768) {
+            const grid = document.getElementById('testimonialGrid');
+            const dotsContainer = document.getElementById('testimonialDots');
+
+            // Init dots
+            dotsContainer.innerHTML = ''; // clear first
+            cards.forEach((_, i) => {
+              const d = document.createElement('div');
+              d.className = 'dot' + (i === 0 ? ' active' : '');
+              dotsContainer.appendChild(d);
+            });
+
+            const dots = dotsContainer.querySelectorAll('.dot');
+
+            // Scroll Listener for active dot
+            grid.addEventListener('scroll', () => {
+              // Use debounce or requestFormatting for perf if heavy, but simple calculation is fine
+              const center = grid.scrollLeft + grid.offsetWidth / 2;
+              let minDiff = Infinity;
+              let activeIndex = 0;
+
+              cards.forEach((card, i) => {
+                const cardCenter = card.offsetLeft + card.offsetWidth / 2;
+                const diff = Math.abs(center - cardCenter);
+                if (diff < minDiff) {
+                  minDiff = diff;
+                  activeIndex = i;
+                }
+              });
+
+              dots.forEach(d => d.classList.remove('active'));
+              if (dots[activeIndex]) dots[activeIndex].classList.add('active');
+            });
+          }
+        });
+      </script>
     </section>
     <div class="animation-wrapper">
       <div data-w-id="528a429d-d8e0-bb7b-63db-ba5915b8ef51" class="hero-interaction"></div>
