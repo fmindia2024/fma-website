@@ -81,10 +81,10 @@
     function initParticles() {
         // CLOUDS (Day)
         clouds = [];
-        const cloudCount = isMobile ? 3 : 6;
+        const cloudCount = isMobile ? 2 : 4;
         for (let i = 0; i < cloudCount; i++) {
             // Generate puffs for organic cloud shape
-            const puffCount = 5 + Math.floor(Math.random() * 5); // 5-9 puffs
+            const puffCount = 3 + Math.floor(Math.random() * 4); // 3-6 puffs
             const puffs = [];
             for (let j = 0; j < puffCount; j++) {
                 puffs.push({
