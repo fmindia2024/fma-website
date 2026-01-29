@@ -29,9 +29,20 @@
 
     <link href="images/favicon.jpg" rel="shortcut icon" type="image/x-icon">
     <link href="images/webclip.png" rel="apple-touch-icon">
+<link href="css/global-animations.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
+    <!-- Global Preloader -->
+    <div id="global-preloader">
+        <div class="loader-content">
+            <div class="loader-logo">FMA.</div>
+            <div class="loader-line-mask">
+                <div class="loader-line"></div>
+            </div>
+        </div>
+    </div>
+
 
     <!-- New Mobile Header (Visible Only on Mobile) -->
     <div class="mobile-header-bar">
@@ -394,6 +405,13 @@
             });
         });
     </script>
+
+    <!-- Global Scroll & Animation Scripts -->
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="js/global-scroll.js"></script>
+
 </body>
 
 </html>

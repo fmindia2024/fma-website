@@ -222,6 +222,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         items.forEach(cat => {
             const card = document.createElement('a');
             card.className = 'work-card category-card';
+            card.style.opacity = '0'; // Initial hidden state for GSAP
             // Link to the Category Page (projects.html with param)
             card.href = `projects.html?category=${cat.id}`;
 
@@ -254,6 +255,24 @@ document.addEventListener('DOMContentLoaded', async function () {
             grid.appendChild(card);
         });
         container.appendChild(grid);
+
+        // Stagger Animation for Categories
+        if (typeof gsap !== 'undefined') {
+            gsap.fromTo(".work-card",
+                { opacity: 0, y: 30 },
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.8,
+                    stagger: 0.1,
+                    ease: "power2.out",
+                    scrollTrigger: {
+                        trigger: container,
+                        start: "top 85%"
+                    }
+                }
+            );
+        }
     }
 
     function renderProjects(items, container) {
@@ -273,11 +292,11 @@ document.addEventListener('DOMContentLoaded', async function () {
             const card = document.createElement('a');
             card.className = 'project-full-card';
             card.href = `detail_project.html?id=${project.id}`;
+            card.style.opacity = '0'; // Initial state for GSAP
 
             // Background Image
             const bgImg = document.createElement('img');
             bgImg.className = 'project-full-bg';
-            // Use image_main from data.json
             bgImg.src = project.image_main;
             bgImg.alt = project.title;
             // Ensure background covers the card
@@ -296,7 +315,6 @@ document.addEventListener('DOMContentLoaded', async function () {
 
             const meta = document.createElement('div');
             meta.className = 'project-full-meta';
-            // Safe access to year
             const yearStr = project.year || "Undefined";
             meta.textContent = `${project.category} — ${yearStr}`;
 
@@ -304,7 +322,6 @@ document.addEventListener('DOMContentLoaded', async function () {
             title.className = 'project-full-title';
             title.textContent = project.title;
 
-            // View Project Button (Visual)
             const btn = document.createElement('div');
             btn.className = 'project-full-btn';
             btn.textContent = 'View Project';
@@ -324,6 +341,24 @@ document.addEventListener('DOMContentLoaded', async function () {
         });
 
         container.appendChild(listContainer);
+
+        // Stagger Animation for Projects
+        if (typeof gsap !== 'undefined') {
+            gsap.fromTo(".project-full-card",
+                { opacity: 0, y: 50 },
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 1,
+                    stagger: 0.15,
+                    ease: "power3.out",
+                    scrollTrigger: {
+                        trigger: container,
+                        start: "top 80%"
+                    }
+                }
+            );
+        }
     }
 
     function attach3DHover(card) {
