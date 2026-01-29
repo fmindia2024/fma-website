@@ -932,6 +932,15 @@
           padding: 0 20px;
         }
 
+
+        .about-card-wrapper {
+          background-color: #0b0b0b;
+          /* Card background */
+          border-radius: 20px;
+          padding: 60px;
+          border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
         .gallery-grid {
           display: grid;
           grid-template-columns: 1fr 1fr;
@@ -1022,14 +1031,17 @@
           justify-content: center;
           align-items: center;
           perspective: 1000px;
-          padding: 20px;
+          padding: 0;
+          /* Removed padding */
+          height: 100%;
+          /* Fill space */
         }
 
-        /* The Frame */
+        /* The Frame - Thinner Border */
         .artwork-frame {
           background-color: #f6f6f6;
-          /* Off-white for realism */
-          padding: 40px;
+          padding: 15px;
+          /* Thinner white border (was 40px) */
           box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
           transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.6s ease;
           position: relative;
@@ -1058,20 +1070,6 @@
           filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
         }
 
-        .artwork-caption {
-          position: absolute;
-          bottom: -30px;
-          right: 0;
-          text-align: right;
-          font-family: serif;
-          font-style: italic;
-          font-size: 13px;
-          color: #666;
-          margin-top: 10px;
-          opacity: 0;
-          transition: opacity 1s ease 0.5s;
-        }
-
         /* Hover Effects */
         @media(min-width: 1025px) {
           .gallery-grid:hover .artwork-frame {
@@ -1091,27 +1089,28 @@
           transform: scale(1);
         }
 
-        .in-view .artwork-caption {
-          opacity: 0.7;
-        }
-
-
         /* --- RESPONSIVE --- */
 
         /* Mobile */
         @media (max-width: 900px) {
           .about-logo-gallery {
-            padding: 60px 0;
+            padding: 40px 0;
           }
 
           .about-logo-gallery .container {
-            padding: 0 20px;
+            padding: 0 10px;
+            /* Maximize width on mobile */
+          }
+
+          .about-card-wrapper {
+            padding: 40px 20px;
+            /* Reduced card padding on mobile */
           }
 
           .gallery-grid {
             grid-template-columns: 1fr;
             gap: 50px;
-            text-align: center;
+            text-align: left;
             display: flex;
             flex-direction: column;
           }
@@ -1120,23 +1119,34 @@
             order: 1;
             width: 100%;
             padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
           }
 
           .gallery-content {
             order: 2;
             padding-right: 0;
-            align-items: center;
+            align-items: flex-start;
             width: 100%;
+            text-align: left;
           }
 
           .artwork-frame {
-            padding: 20px;
-            max-width: 90%;
+            padding: 10px;
+            /* Thinner on mobile too */
+            max-width: 100%;
+            width: 100%;
             margin: 0 auto;
           }
 
+          /* Increase artwork size */
+          .artwork-img {
+            width: 85%;
+          }
+
           .gallery-heading {
-            font-size: 36px;
+            font-size: 32px;
             margin-bottom: 16px;
           }
 
@@ -1147,57 +1157,52 @@
 
           .gallery-body {
             font-size: 15px;
-            text-align: center;
+            text-align: left;
             margin-bottom: 30px;
+            max-width: 100%;
           }
 
           .eyebrow-text {
-            display: none;
-          }
-
-          .artwork-caption {
-            position: relative;
-            bottom: auto;
-            right: auto;
-            text-align: center;
-            margin-top: 15px;
-            width: 100%;
-            color: #555;
+            display: inline-block;
+            margin-bottom: 15px;
           }
         }
       </style>
 
       <div class="container">
-        <div class="gallery-grid" id="aboutLogoGrid">
+        <!-- Added Wrapper for card styling -->
+        <div class="about-card-wrapper">
+          <div class="gallery-grid" id="aboutLogoGrid">
 
-          <!-- Content -->
-          <div class="gallery-content">
-            <span class="eyebrow-text">The Story</span>
-            <h2 class="gallery-heading">The Mark<br>of Meaning.</h2>
-            <h3 class="artist-subheading">Original Artwork by K.M. Vasudevan Namboodiri</h3>
+            <!-- Content -->
+            <div class="gallery-content">
+              <span class="eyebrow-text">The Story</span>
+              <h2 class="gallery-heading">The Mark<br>of Meaning.</h2>
+              <h3 class="artist-subheading">Original Artwork by K.M. Vasudevan Namboodiri</h3>
 
-            <div class="gallery-body">
-              <p>More than a symbol, our identity is a piece of history. It captures the essence of our philosophy—where
-                tradition intersects with modernity.</p>
-              <p>Fluid lines juxtaposed against rigid geometry represent the dialogue between nature and structure, the
-                core of our design language.</p>
-            </div>
-
-            <a href="about.html" class="gallery-cta">Explore The Context</a>
-          </div>
-
-          <!-- Artwork -->
-          <div class="gallery-artwork-wrapper">
-            <div class="artwork-frame">
-              <div class="artwork-canvas">
-                <img src="images/fma-logo-artwork.png" alt="style guide" class="artwork-img">
+              <div class="gallery-body">
+                <p>More than a symbol, our identity is a piece of history. It captures the essence of our
+                  philosophy—where
+                  tradition intersects with modernity.</p>
+                <p>Fluid lines juxtaposed against rigid geometry represent the dialogue between nature and structure,
+                  the
+                  core of our design language.</p>
               </div>
-            </div>
-            <div class="artwork-caption">
-              Acrylic on Canvas, 2014
-            </div>
-          </div>
 
+              <a href="about.html" class="gallery-cta">Explore The Context</a>
+            </div>
+
+            <!-- Artwork -->
+            <div class="gallery-artwork-wrapper">
+              <div class="artwork-frame">
+                <div class="artwork-canvas">
+                  <img src="images/fma-logo-artwork.png" alt="style guide" class="artwork-img">
+                </div>
+              </div>
+              <!-- Removed Caption -->
+            </div>
+
+          </div>
         </div>
       </div>
 
@@ -1338,8 +1343,8 @@
         <div class="line-divider" style="background-color: rgba(255,255,255,0.1); margin-bottom: 40px;"></div>
 
         <!-- Navigation & Socials Row -->
-        <div class="navigation-grid"
-          style="grid-template-columns: repeat(4, auto) 1fr; align-items: center; gap: 40px; margin-bottom: 60px;">
+        <div class="navigation-grid footer-nav-responsive"
+          >
           <!-- Nav Links with Green Hover -->
           <a href="projects.html" class="footer-nav-link"
             style="text-decoration: none; color: #fff; font-size: 1rem; transition: color 0.3s;">Projects</a>

@@ -83,12 +83,23 @@
         clouds = [];
         const cloudCount = isMobile ? 3 : 6;
         for (let i = 0; i < cloudCount; i++) {
+            // Generate puffs for organic cloud shape
+            const puffCount = 5 + Math.floor(Math.random() * 5); // 5-9 puffs
+            const puffs = [];
+            for (let j = 0; j < puffCount; j++) {
+                puffs.push({
+                    xOff: (Math.random() - 0.5) * 60,
+                    yOff: (Math.random() - 0.5) * 30,
+                    r: 20 + Math.random() * 25
+                });
+            }
+
             clouds.push({
                 x: Math.random() * width,
                 y: Math.random() * height * 0.4,
                 speed: 0.05 + Math.random() * 0.05, // Very slow
                 size: 0.5 + Math.random() * 0.8,
-                shape: Math.floor(Math.random() * 3) // 0:Cumulus, 1:Stratus, 2:Cirrus
+                puffs: puffs
             });
         }
 
@@ -145,14 +156,15 @@
             if (c.x > width + 100) c.x = -100;
 
             ctx.beginPath();
-            if (c.shape === 0) { // Cumulus
-                ctx.arc(c.x, c.y, 20 * c.size, 0, Math.PI * 2);
-                ctx.arc(c.x + 25 * c.size, c.y - 10 * c.size, 25 * c.size, 0, Math.PI * 2);
-                ctx.arc(c.x + 50 * c.size, c.y, 20 * c.size, 0, Math.PI * 2);
-            } else if (c.shape === 1) { // Stratus
-                ctx.ellipse(c.x, c.y, 60 * c.size, 15 * c.size, 0, 0, Math.PI * 2);
-            } else { // Cirrus
-                ctx.rect(c.x, c.y, 80 * c.size, 4 * c.size); // Stylized minimal
+            if (c.puffs) {
+                c.puffs.forEach(p => {
+                    const px = c.x + p.xOff * c.size;
+                    const py = c.y + p.yOff * c.size;
+                    const pr = p.r * c.size;
+                    // Move to start of arc to avoid connecting lines
+                    ctx.moveTo(px + pr, py);
+                    ctx.arc(px, py, pr, 0, Math.PI * 2);
+                });
             }
             ctx.fill();
         });

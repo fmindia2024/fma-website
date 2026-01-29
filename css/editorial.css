@@ -277,4 +277,26 @@ body {
     .layout-full .photo-card {
         height: 60vh;
     }
+
+    /* Mobile Text Adjustment */
+    .project-narrative-editorial {
+        padding: 6rem 1.5rem;
+        text-align: left;
+        /* Left align container */
+    }
+
+    .narrative-title {
+        display: block;
+        text-align: left;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        width: 100%;
+    }
+
+    .narrative-text {
+        font-size: 1.5rem;
+        /* Smaller size for mobile */
+        line-height: 1.4;
+        text-align: left;
+        /* Left align text */
+    }
 }

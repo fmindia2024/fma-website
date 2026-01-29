@@ -2329,8 +2329,14 @@ blockquote {
   }
 
   .top-logo {
-    height: 60vh;
-    min-height: 400px;
+    height: 40vh;
+    min-height: 300px;
+  }
+
+  .header-text-overlay h1 {
+    font-size: 20px !important;
+    padding-left: 16px;
+    padding-right: 16px;
   }
 
   .main-image.sixth {
@@ -3024,6 +3030,43 @@ a:hover {
     /* Scale logo text */
   }
 
+  /* Responsive Footer Navigation */
+  .footer-nav-responsive {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    gap: 40px !important;
+    margin-bottom: 60px !important;
+    width: 100% !important;
+    grid-template-columns: none !important;
+    /* Override grid */
+  }
+
+  .footer-nav-responsive .social-content {
+    margin-left: auto !important;
+  }
+
+  /* Tablet Wrapping */
+  @media (max-width: 991px) {
+    .footer-nav-responsive {
+      gap: 20px !important;
+    }
+  }
+
+  /* Mobile Stacking */
+  @media (max-width: 479px) {
+    .footer-nav-responsive {
+      flex-direction: column !important;
+      align-items: flex-start !important;
+      gap: 20px !important;
+    }
+
+    .footer-nav-responsive .social-content {
+      margin-left: 0 !important;
+      margin-top: 10px !important;
+    }
+  }
+
   .menu-button {
     padding: 15px;
   }
@@ -3077,5 +3120,32 @@ a:hover {
   .navigation-grid._1-column {
     align-items: center;
     text-align: center;
+  }
+
+  /* Force Hover Interactions on Mobile */
+  .service-item .service-title {
+    color: var(--brand-color) !important;
+  }
+
+  .service-item .plus-wrapper .line-1,
+  .service-item .plus-wrapper .line-2 {
+    background-color: var(--brand-color) !important;
+  }
+
+  .blog-category-tag {
+    background-color: var(--brand-color) !important;
+    color: #fff !important;
+  }
+
+  .magnetic-btn {
+    border-color: var(--brand-color) !important;
+  }
+
+  .magnetic-btn .btn-fill {
+    background-color: var(--brand-color) !important;
+  }
+
+  .magnetic-btn .btn-text {
+    color: #ffffff !important;
   }
 }

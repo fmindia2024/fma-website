@@ -276,34 +276,83 @@
         left: 20px;
         bottom: 30px;
     }
+
+    /* Force Hover States for Tablet/Mobile Landscape */
+    .work-card .work-card-content {
+        transform: translateY(0) !important;
+        opacity: 1 !important;
+    }
+
+    .work-card .work-card-overlay {
+        opacity: 0.8 !important;
+    }
+
+    .project-full-btn {
+        background: #fff !important;
+        color: #000 !important;
+        opacity: 1 !important;
+        transform: translateY(0) !important;
+    }
+
+    .project-full-overlay {
+        opacity: 0.6 !important;
+    }
 }
+
 /* MOBILE FIXES */
 @media screen and (max-width: 479px) {
     .work-grid {
         grid-template-columns: 1fr;
         gap: 20px;
     }
-    
+
     .project-full-card {
-        height: 60vh; /* Taller for mobile impact */
+        height: 60vh;
+        /* Taller for mobile impact */
         margin-bottom: 20px;
     }
-    
+
     .project-full-title {
         font-size: 1.8rem;
     }
-    
+
     .project-full-content {
         left: 20px;
         bottom: 25px;
         right: 20px;
     }
-    
+
     .project-list-container {
         padding-top: 20px;
         padding-bottom: 40px;
         padding-left: 20px;
         padding-right: 20px;
         gap: 30px;
+    }
+
+    /* Force Hover States for Interaction */
+    .work-card .work-card-content {
+        transform: translateY(0) !important;
+        opacity: 1 !important;
+    }
+
+    .work-card .work-card-overlay {
+        opacity: 0.8 !important;
+    }
+
+    .work-card .work-card-bg {
+        transform: scale(1.05);
+        /* Slight zoom default */
+    }
+
+    .project-full-btn {
+        background: #fff !important;
+        color: #000 !important;
+        opacity: 1 !important;
+        transform: translateY(0) !important;
+    }
+
+    .project-full-overlay {
+        opacity: 0.6 !important;
     }
 }
