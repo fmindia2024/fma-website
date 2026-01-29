@@ -31,7 +31,7 @@
             star: 'rgba(255, 255, 255, 0.7)'
         },
         // Timing
-        cycleDuration: 300000, // 5 minutes in ms
+        cycleDuration: 60000, // 1 minute in ms
     };
 
     // --- State ---
