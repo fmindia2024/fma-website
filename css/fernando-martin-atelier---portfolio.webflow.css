@@ -2329,8 +2329,12 @@ blockquote {
   }
 
   .top-logo {
-    height: 40vh;
-    min-height: 300px;
+    height: 30vh;
+    min-height: 250px;
+    margin-top: auto;
+    margin-bottom: auto;
+    display: block;
+    /* Ensure block for margin auto to work if parent is flex, or use flex centering on parent */
   }
 
   .header-text-overlay h1 {
@@ -2644,8 +2648,11 @@ blockquote {
   }
 
   .top-logo {
-    height: 55vh;
-    min-height: 350px;
+    height: 25vh;
+    /* Reduced further for smaller mobile */
+    min-height: 200px;
+    margin-top: auto;
+    margin-bottom: auto;
   }
 
   .services-image-wrapper {

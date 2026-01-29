@@ -180,23 +180,27 @@
     <section class="location-section">
         <div class="container">
             <div class="contact-label" style="text-align: center; margin-bottom: 2rem;">Visit Our Studio</div>
-            <div class="map-placeholder" style="background-color: transparent !important; opacity: 1 !important;">
+            <div class="map-placeholder"
+                style="background-color: #1a1a1a; border-radius: 12px; overflow: hidden; position: relative; height: 500px;">
+                <!-- Updated "Beautiful" Dark Mode Map via CSS Filters -->
                 <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15664.088006324838!2d75.7684074811093!3d11.25875306660145!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba65938563d4747%3A0x32150641ca32ecab!2sKozhikode%2C%20Kerala!5e1!3m2!1sen!2sin!4v1737660000000!5m2!1sen!2sin"
-                    width="100%" height="100%" style="border:0; filter: grayscale(100%) invert(100%) contrast(80%);"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15664.088006324838!2d75.7684074811093!3d11.25875306660145!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba65938563d4747%3A0x32150641ca32ecab!2sKozhikode%2C%20Kerala!5e0!3m2!1sen!2sin!4v1737660000000!5m2!1sen!2sin"
+                    width="100%" height="100%"
+                    style="border:0; filter: invert(90%) hue-rotate(180deg) brightness(95%) contrast(90%) satur(0); display: block;"
                     allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
                 </iframe>
 
-                <!-- Overlay Card -->
+                <!-- Custom Overlay Card -->
                 <div
-                    style="position: absolute; bottom: 30px; left: 30px; background: #0b0d12; padding: 30px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.1); max-width: 300px;">
-                    <h3 style="font-size: 1.5rem; margin-bottom: 10px; font-weight: 300; color: #fff; margin-top: 0;">
+                    style="position: absolute; bottom: 30px; left: 30px; background: rgba(11, 13, 18, 0.95); padding: 30px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.08); backdrop-filter: blur(10px); max-width: 320px; box-shadow: 0 20px 40px rgba(0,0,0,0.5);">
+                    <h3
+                        style="font-size: 1.4rem; margin-bottom: 8px; font-weight: 400; color: #fff; margin-top: 0; font-family: 'Helvetica', sans-serif;">
                         Fernando Martin Atelier</h3>
-                    <p style="color: #a4b1cd; margin-bottom: 20px; font-size: 0.9rem; line-height: 1.5;">Calicut,
+                    <p style="color: #a4b1cd; margin-bottom: 24px; font-size: 0.95rem; line-height: 1.6;">Calicut,
                         Kerala, India<br>673001</p>
-                    <a href="https://goo.gl/maps/CalicutExampleLink" target="_blank"
-                        style="display: inline-block; padding: 10px 24px; background: #fff; color: #000; text-decoration: none; border-radius: 30px; font-size: 0.9rem; font-weight: 500; transition: all 0.3s ease;">
-                        View on Google Maps
+                    <a href="https://share.google/4WPA5NexSgZcHQULd" target="_blank"
+                        style="display: inline-flex; align-items: center; justify-content: center; padding: 12px 28px; background: #fff; color: #000; text-decoration: none; border-radius: 50px; font-size: 0.9rem; font-weight: 500; transition: transform 0.2s ease, box-shadow 0.2s ease;">
+                        open in maps ↗
                     </a>
                 </div>
             </div>
@@ -204,8 +208,7 @@
     </section>
 
     <div class="footer">
-        <div class="container" style="opacity: 0; transform: translateY(30px); transition: all 0.8s ease;"
-            id="footerContent">
+        <div class="container" id="footerContent">
             <!-- Main Footer Content -->
             <div class="grid-2-column reverse" style="align-items: flex-start; margin-bottom: 80px;">
                 <!-- Left: Big CTA -->
@@ -247,8 +250,7 @@
             <div class="line-divider" style="background-color: rgba(255,255,255,0.1); margin-bottom: 40px;"></div>
 
             <!-- Navigation & Socials Row -->
-            <div class="navigation-grid footer-nav-responsive"
-                >
+            <div class="navigation-grid footer-nav-responsive">
                 <!-- Nav Links with Green Hover -->
                 <a href="projects.html" class="footer-nav-link"
                     style="text-decoration: none; color: #fff; font-size: 1rem; transition: color 0.3s;">Projects</a>

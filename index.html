@@ -934,11 +934,16 @@
 
 
         .about-card-wrapper {
-          background-color: #0b0b0b;
+          background: radial-gradient(circle at 70% 50%, #1a2a40 0%, #0b111a 100%);
+          /* Museum Card Wall Blue */
           /* Card background */
           border-radius: 20px;
-          padding: 60px;
-          border: 1px solid rgba(255, 255, 255, 0.05);
+          padding: 80px 60px;
+          /* Increased top/bottom padding for "wall" feel */
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          /* Slightly more visible border */
+          box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.5);
+          /* Inner vignette */
         }
 
         .gallery-grid {
@@ -1040,9 +1045,11 @@
         /* The Frame - Thinner Border */
         .artwork-frame {
           background-color: #f6f6f6;
-          padding: 15px;
+          padding: 20px;
+          /* Slightly thicker frame for impact */
           /* Thinner white border (was 40px) */
-          box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+          box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(0, 0, 0, 0.1);
+          /* Deep natural shadow + rim definition */
           transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.6s ease;
           position: relative;
           width: 100%;
@@ -1064,10 +1071,18 @@
         }
 
         .artwork-img {
-          width: 60%;
+          width: 85%;
+          /* Significantly larger logo */
           height: auto;
           object-fit: contain;
-          filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
+          filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.4));
+          /* Enhanced depth for logo itself */
+          transition: transform 0.5s ease;
+        }
+
+        /* Subtle zoom on hover */
+        .artwork-frame:hover .artwork-img {
+          transform: scale(1.05);
         }
 
         /* Hover Effects */
@@ -1176,20 +1191,20 @@
 
             <!-- Content -->
             <div class="gallery-content">
-              <span class="eyebrow-text">The Story</span>
-              <h2 class="gallery-heading">The Mark<br>of Meaning.</h2>
-              <h3 class="artist-subheading">Original Artwork by K.M. Vasudevan Namboodiri</h3>
+              <span class="eyebrow-text">The Identity</span>
+              <h2 class="gallery-heading">The Legacy of<br>Juan Botas.</h2>
+              <h3 class="artist-subheading">Original Artwork by Juan Suárez Botas (1958-1992)</h3>
 
               <div class="gallery-body">
-                <p>More than a symbol, our identity is a piece of history. It captures the essence of our
-                  philosophy—where
-                  tradition intersects with modernity.</p>
-                <p>Fluid lines juxtaposed against rigid geometry represent the dialogue between nature and structure,
-                  the
-                  core of our design language.</p>
+                <p>A tribute to the visionary Spanish artist and illustrator whose work defined an era in New York.
+                  Known for his contributions to <em>Time</em>, <em>Vogue</em>, and <em>The New York Times</em>, his
+                  style bridged rigorous discipline with expressive fluidity.</p>
+                <p>Our identity preserves his "Mark of Meaning"—a visual dialogue between structure and emotion,
+                  capturing the timeless intersection of art and architecture.</p>
               </div>
 
-              <a href="about.html" class="gallery-cta">Explore The Context</a>
+              <a href="https://visualaids.org/artists/juan-botas" target="_blank" class="gallery-cta">Discover the
+                Legacy</a>
             </div>
 
             <!-- Artwork -->
@@ -1343,8 +1358,7 @@
         <div class="line-divider" style="background-color: rgba(255,255,255,0.1); margin-bottom: 40px;"></div>
 
         <!-- Navigation & Socials Row -->
-        <div class="navigation-grid footer-nav-responsive"
-          >
+        <div class="navigation-grid footer-nav-responsive">
           <!-- Nav Links with Green Hover -->
           <a href="projects.html" class="footer-nav-link"
             style="text-decoration: none; color: #fff; font-size: 1rem; transition: color 0.3s;">Projects</a>
